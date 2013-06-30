@@ -1,6 +1,5 @@
-<?php
+<?php namespace Schickling\Backup\Databases;
 
-use Schickling\Backup\Databases\MySQLDatabase;
 use Mockery as m;
 
 class MySQLDatabaseTest extends \PHPUnit_Framework_TestCase
