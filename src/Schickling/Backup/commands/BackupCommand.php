@@ -20,8 +20,10 @@ class BackupCommand extends Command
 
 	public function fire()
 	{
+		$this->checkDumpFolder();
+		
 		$fileName = date('YmdHis') . '.' .$this->database->getFileExtension();
-		$destinationFile = storage_path() . '/' . $fileName;
+		$destinationFile = storage_path() . '/dumps\/' . $fileName;
 
 		if ($this->database->dump($destinationFile))
 		{
@@ -31,7 +33,16 @@ class BackupCommand extends Command
 		{
 			$this->line('Database backup failed');
 		}
+	}
 
+	protected function checkDumpFolder()
+	{
+		$dumpsFolder = storage_path() . '/dumps';
+
+		if ( ! is_dir($dumpsFolder))
+		{
+			mkdir($dumpsFolder);
+		}
 	}
 
 }
