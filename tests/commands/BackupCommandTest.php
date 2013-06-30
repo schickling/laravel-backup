@@ -1,5 +1,6 @@
-<?php namespace Schickling\Backup\Commands;
+<?php
 
+use Schickling\Backup\Commands\BackupCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 use Orchestra\Testbench\TestCase;
 use Mockery as m;
