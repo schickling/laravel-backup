@@ -1,0 +1,23 @@
+{
+    "name": "schickling/backup",
+    "description": "",
+    "authors": [
+        {
+            "name": "Johannes Schickling",
+            "email": "schickling.j@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Schickling\\Backup": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
