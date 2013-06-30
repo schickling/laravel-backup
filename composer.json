@@ -1,6 +1,6 @@
 {
     "name": "schickling/backup",
-    "description": "",
+    "description": "Backup and restore database support for Laravel 4 applications",
     "authors": [
         {
             "name": "Johannes Schickling",
@@ -12,9 +12,6 @@
         "illuminate/support": "4.0.x"
     },
     "autoload": {
-        "classmap": [
-            "src/migrations"
-        ],
         "psr-0": {
             "Schickling\\Backup": "src/"
         }
