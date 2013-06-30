@@ -9,7 +9,13 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "illuminate/support": "4.0.x"
+        "illuminate/support": "4.0.x",
+        "illuminate/console": "4.0.x",
+        "illuminate/foundation": "4.0.x",
+        "orchestra/testbench": "2.0.*"
+    },
+    "require-dev": {
+        "mockery/mockery": "dev-master"
     },
     "autoload": {
         "psr-0": {
