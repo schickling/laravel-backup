@@ -6,13 +6,15 @@ Backup and restore database support for Laravel 4 applications
 ## Installation
 
 1. Add the following to your composer.json and run `composer update`
-```json
-{
-    "require": {
-        "schickling/backup": "dev-master"
+
+    ```json
+    {
+        "require": {
+            "schickling/backup": "dev-master"
+        }
     }
-}
-```
+    ```
+
 2. Add `Schickling\Backup\BackupServiceProvider` to your config/app.php
 
 ## Usage
