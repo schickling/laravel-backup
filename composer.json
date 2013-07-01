@@ -14,7 +14,7 @@
     },
     "require-dev": {
         "illuminate/foundation": "4.0.x",
-        "orchestra/testbench": "2.0.*",
+        "orchestra/testbench": "2.1.*",
         "mockery/mockery": "dev-master"
     },
     "autoload": {
