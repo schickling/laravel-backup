@@ -13,6 +13,7 @@
         "illuminate/console": "4.0.x"
     },
     "require-dev": {
+        "illuminate/foundation": "4.0.x",
         "orchestra/testbench": "2.0.*",
         "mockery/mockery": "dev-master"
     },
