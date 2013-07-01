@@ -13,6 +13,13 @@ class BackupCommandTest extends TestCase
         m::close();
     }
 
+    protected function getPackageProviders()
+    {
+        return array(
+            'Schickling\Backup\BackupServiceProvider',
+        );
+    }
+
     public function testSuccessfulBackup()
     {
         $databaseMock = m::mock('Schickling\Backup\Databases\DatabaseInterface');
