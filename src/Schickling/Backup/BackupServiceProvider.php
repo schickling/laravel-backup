@@ -11,9 +11,11 @@ class BackupServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['db.backup'] = $this->app->share(function($app)
+		$database = $this->getDatabase();
+
+		$this->app['db.backup'] = $this->app->share(function($app) use ($database)
 		{
-			return new Commands\BackupCommand($this->getDatabase());
+			return new Commands\BackupCommand($database);
 		});
 
 		$this->commands(
@@ -28,7 +30,6 @@ class BackupServiceProvider extends ServiceProvider {
 		{
 			throw new \Exception('Database driver not supported yet');
 		}
-
 
 		$databaseConfig = $databaseConfig['connections'][$databaseConfig['default']];
 		$console = new Console();
