@@ -23,11 +23,11 @@ class BackupCommand extends Command
 		$this->checkDumpFolder();
 		
 		$fileName = date('YmdHis') . '.' .$this->database->getFileExtension();
-		$destinationFile = storage_path() . '/dumps\/' . $fileName;
+		$destinationFile = storage_path() . DIRECTORY_SEPARATOR . 'dumps' . DIRECTORY_SEPARATOR . $fileName;
 
 		if ($this->database->dump($destinationFile))
 		{
-			$this->line(sprintf('Database backup was successful. %s was saved in storage/dumps.', $fileName));
+			$this->line(sprintf('Database backup was successful. %s was saved in the dumps folder.', $fileName));
 		}
 		else
 		{
@@ -37,7 +37,7 @@ class BackupCommand extends Command
 
 	protected function checkDumpFolder()
 	{
-		$dumpsFolder = storage_path() . '/dumps';
+		$dumpsFolder = storage_path() . DIRECTORY_SEPARATOR . 'dumps';
 
 		if ( ! is_dir($dumpsFolder))
 		{

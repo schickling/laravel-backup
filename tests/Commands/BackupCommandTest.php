@@ -37,7 +37,7 @@ class BackupCommandTest extends TestCase
         $tester = new CommandTester($command);
         $tester->execute(array());
 
-        $this->assertRegExp("/^Database backup was successful. [0-9]{14}.sql was saved in storage\/dumps.$/", $tester->getDisplay());
+        $this->assertRegExp("/^Database backup was successful. [0-9]{14}.sql was saved in the dumps folder.$/", $tester->getDisplay());
     }
 
     public function testFailingBackup()
