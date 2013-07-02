@@ -22,7 +22,7 @@ class MySQLDatabase implements DatabaseInterface
 
 	public function dump($destinationFile)
 	{
-		$command = sprintf('mysqldump --user=%s --password=%s --host=%s %s > %s',
+		$command = sprintf('mysqldump --user="%s" --password="%s" --host="%s" "%s" > "%s"',
 			$this->user,
 			$this->password,
 			$this->host, 

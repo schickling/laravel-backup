@@ -23,7 +23,7 @@ class MySQLDatabaseTest extends \PHPUnit_Framework_TestCase
     public function testDump()
     {
         $this->console->shouldReceive('run')
-                      ->with('mysqldump --user=testUser --password=password --host=localhost testDatabase > testfile.sql')
+                      ->with('mysqldump --user="testUser" --password="password" --host="localhost" "testDatabase" > "testfile.sql"')
                       ->once()
                       ->andReturn(true);
 
@@ -33,7 +33,7 @@ class MySQLDatabaseTest extends \PHPUnit_Framework_TestCase
     public function testDumpFails()
     {
         $this->console->shouldReceive('run')
-                      ->with('mysqldump --user=testUser --password=password --host=localhost testDatabase > testfile.sql')
+                      ->with('mysqldump --user="testUser" --password="password" --host="localhost" "testDatabase" > "testfile.sql"')
                       ->once()
                       ->andReturn(false);
 
