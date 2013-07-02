@@ -11,7 +11,8 @@ class BackupServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$database = $this->getDatabase();
+		$databaseBuilder = new DatabaseBuilder($this->app->config['database']);
+		$database = $databaseBuilder->getDatabase();
 
 		$this->app['db.backup'] = $this->app->share(function($app) use ($database)
 		{
@@ -21,27 +22,6 @@ class BackupServiceProvider extends ServiceProvider {
 		$this->commands(
 			'db.backup'
 			);
-	}
-
-	protected function getDatabase()
-	{
-		$databaseConfig = $this->app->config['database'];
-		if ($databaseConfig['default'] != 'mysql')
-		{
-			throw new \Exception('Database driver not supported yet');
-		}
-
-		$databaseConfig = $databaseConfig['connections'][$databaseConfig['default']];
-		$console = new Console();
-		$database = new Databases\MySQLDatabase(
-			$console,
-			$databaseConfig['database'],
-			$databaseConfig['username'],
-			$databaseConfig['password'],
-			$databaseConfig['host']
-			);
-
-		return $database;
 	}
 
 }
