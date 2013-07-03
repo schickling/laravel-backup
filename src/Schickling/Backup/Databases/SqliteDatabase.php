@@ -24,6 +24,11 @@ class SqliteDatabase implements DatabaseInterface
 		return $this->console->run($command);
 	}
 
+	public function restore($sourceFile)
+	{
+		
+	}
+
 	public function getFileExtension()
 	{
 		return 'sqlite';

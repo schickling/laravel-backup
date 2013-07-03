@@ -33,6 +33,11 @@ class MySQLDatabase implements DatabaseInterface
 		return $this->console->run($command);
 	}
 
+	public function restore($sourceFile)
+	{
+		
+	}
+
 	public function getFileExtension()
 	{
 		return 'sql';
