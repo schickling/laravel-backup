@@ -26,10 +26,14 @@ php artisan db:backup
 ```
 
 #### Restore
-*Coming soon!*
+Paths are relative to the app/storage/dumps folder.
+```
+php artisan db:restore dump.sql
+```
 
 ## TODO - Upcoming Features
 * `db:restore` list all available dumps
+* `db:restore WRONGFILENAME` more detailed error message
 * `db:backup FILENAME` set title for dump
 * `db:backup --db CONNECTION` specify connection, default: default connection
 * *Some more ideas? Tell me!*
