@@ -19,8 +19,14 @@ class BackupServiceProvider extends ServiceProvider {
 			return new Commands\BackupCommand($database);
 		});
 
+		$this->app['db.restore'] = $this->app->share(function($app) use ($database)
+		{
+			return new Commands\RestoreCommand($database);
+		});
+
 		$this->commands(
-			'db.backup'
+			'db.backup',
+			'db.restore'
 			);
 	}
 
