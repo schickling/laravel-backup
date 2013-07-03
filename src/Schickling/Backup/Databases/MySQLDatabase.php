@@ -35,7 +35,15 @@ class MySQLDatabase implements DatabaseInterface
 
 	public function restore($sourceFile)
 	{
-		
+		$command = sprintf('mysql --user="%s" --password="%s" --host="%s" "%s" < "%s"',
+			$this->user,
+			$this->password,
+			$this->host, 
+			$this->database,
+			$sourceFile
+		);
+
+		return $this->console->run($command);
 	}
 
 	public function getFileExtension()

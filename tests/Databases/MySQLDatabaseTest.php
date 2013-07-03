@@ -40,4 +40,24 @@ class MySQLDatabaseTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->database->dump('testfile.sql'));
     }
 
+    public function testRestore()
+    {
+        $this->console->shouldReceive('run')
+                      ->with('mysql --user="testUser" --password="password" --host="localhost" "testDatabase" < "testfile.sql"')
+                      ->once()
+                      ->andReturn(true);
+
+        $this->assertTrue($this->database->restore('testfile.sql'));
+    }
+
+    public function testRestoreFails()
+    {
+        $this->console->shouldReceive('run')
+                      ->with('mysql --user="testUser" --password="password" --host="localhost" "testDatabase" < "testfile.sql"')
+                      ->once()
+                      ->andReturn(false);
+
+        $this->assertFalse($this->database->restore('testfile.sql'));
+    }
+
 }
