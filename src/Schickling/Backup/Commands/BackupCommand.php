@@ -1,29 +1,17 @@
 <?php namespace Schickling\Backup\Commands;
 
-use Illuminate\Console\Command;
-use Schickling\Backup\Databases\DatabaseInterface;
-
-class BackupCommand extends Command
+class BackupCommand extends BaseCommand
 {
-	protected $database;
-
 	protected $name = 'db:backup';
 
 	protected $description = 'Backup the default database to `app/storage/dumps`';
-
-	public function __construct(DatabaseInterface $database)
-	{
-		parent::__construct();
-
-		$this->database = $database;
-	}
 
 	public function fire()
 	{
 		$this->checkDumpFolder();
 		
 		$fileName = date('YmdHis') . '.' .$this->database->getFileExtension();
-		$destinationFile = storage_path() . DIRECTORY_SEPARATOR . 'dumps' . DIRECTORY_SEPARATOR . $fileName;
+		$destinationFile = $this->getDumpsPath() . $fileName;
 
 		if ($this->database->dump($destinationFile))
 		{
@@ -37,11 +25,11 @@ class BackupCommand extends Command
 
 	protected function checkDumpFolder()
 	{
-		$dumpsFolder = storage_path() . DIRECTORY_SEPARATOR . 'dumps';
+		$dumpsPath = $this->getDumpsPath();
 
-		if ( ! is_dir($dumpsFolder))
+		if ( ! is_dir($dumpsPath))
 		{
-			mkdir($dumpsFolder);
+			mkdir($dumpsPath);
 		}
 	}
 
