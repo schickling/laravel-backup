@@ -27,3 +27,9 @@ php artisan db:backup
 
 #### Restore
 *Coming soon!*
+
+## TODO - Upcoming Features
+* `db:restore` list all available dumps
+* `db:backup FILENAME` set title for dump
+* `db:backup --db CONNECTION` specify connection, default: default connection
+* *Some more ideas? Tell me!*
