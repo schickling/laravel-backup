@@ -21,7 +21,11 @@ class DatabaseBuilder
 			case 'sqlite':
 			$this->buildSqlite($realConfig);
 			break;
-			
+
+			case 'pgsql':
+			$this->buildPostgres($realConfig);
+			break;
+
 			default:
 			throw new \Exception('Database driver not supported yet');
 			break;
@@ -49,6 +53,17 @@ class DatabaseBuilder
 		$this->database = new Databases\SqliteDatabase(
 			$this->console,
 			$config['database']
+			);
+	}
+
+	protected function buildPostgres(array $config)
+	{
+		$this->database = new Databases\PostgresDatabase(
+			$this->console,
+			$config['database'],
+			$config['username'],
+			$config['password'],
+			$config['host']
 			);
 	}
 
