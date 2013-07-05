@@ -44,6 +44,25 @@ class DatabaseBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Schickling\Backup\Databases\SqliteDatabase', $this->databaseBuilder->getDatabase());
     }
 
+    public function testPostgres() {
+        $config = array(
+            'default'       => 'postgresTest',
+            'connections'   => array(
+                'postgresTest' => array(
+                    'driver'    => 'pgsql',
+                    'host'      => 'localhost',
+                    'database'  => 'database',
+                    'username'  => 'root',
+                    'password'  => 'paso',
+                    )
+                )
+            );
+
+        $this->databaseBuilder = new DatabaseBuilder($config);
+
+        $this->assertInstanceOf('Schickling\Backup\Databases\PostgresDatabase', $this->databaseBuilder->getDatabase());
+    }
+
     public function testUnsupported()
     {
         $config = array(
