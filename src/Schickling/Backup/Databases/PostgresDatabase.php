@@ -22,7 +22,7 @@ class PostgresDatabase implements DatabaseInterface
 
 	public function dump($destinationFile)
 	{
-		$command = sprintf('PG_PASSWORD="%s" pg_dump -Fc --no-acl --no-owner -h "%s" -U "%s" "%s" > "%s"',
+		$command = sprintf('PGPASSWORD="%s" pg_dump -Fc --no-acl --no-owner -h "%s" -U "%s" "%s" > "%s"',
 			$this->password,
 			$this->host,
 			$this->user,
@@ -35,7 +35,7 @@ class PostgresDatabase implements DatabaseInterface
 
 	public function restore($sourceFile)
 	{
-		$command = sprintf('PG_PASSWORD="%s" pg_restore --verbose --clean --no-acl --no-owner -h "%s" -U "%s" -d "%s" < "%s"',
+		$command = sprintf('PGPASSWORD="%s" pg_restore --verbose --clean --no-acl --no-owner -h "%s" -U "%s" -d "%s" "%s"',
 			$this->password,
 			$this->host,
 			$this->user,
