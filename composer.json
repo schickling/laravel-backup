@@ -8,7 +8,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0",
+        "symfony/finder": "2.4.*@dev"
     },
     "require-dev": {
         "laravel/framework": "4.1.*",

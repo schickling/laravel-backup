@@ -57,6 +57,32 @@ class RestoreCommandTest extends TestCase
             'dump' => 'testDump.sql'
             ));
 
-        $this->assertEquals("Database restore failed\n", $tester->getDisplay());
+        $this->assertEquals("Database restore failed.\n", $tester->getDisplay());
+    }
+
+    public function testDumpListForEmptyFolder()
+    {
+        $this->app->config->set('database.dumps', __DIR__ . '/resources/EmptyFolder');
+
+        $databaseMock = m::mock('Schickling\Backup\Databases\DatabaseInterface');
+        $command = new RestoreCommand($databaseMock);
+
+        $tester = new CommandTester($command);
+        $tester->execute(array());
+
+        $this->assertEquals("You haven't saved any dumps.\n", $tester->getDisplay());
+    }
+
+    public function testDumpListForNonEmptyFolder()
+    {
+        $this->app->config->set('database.dumps', __DIR__ . '/resources/NonEmptyFolder');
+
+        $databaseMock = m::mock('Schickling\Backup\Databases\DatabaseInterface');
+        $command = new RestoreCommand($databaseMock);
+
+        $tester = new CommandTester($command);
+        $tester->execute(array());
+
+        $this->assertEquals("Please select one of the following dumps:\nhello.sql\nworld.sql\n", $tester->getDisplay());
     }
 }

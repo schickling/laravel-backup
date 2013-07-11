@@ -1,6 +1,7 @@
 <?php namespace Schickling\Backup\Commands;
 
 use Illuminate\Console\Command;
+use Config;
 use Schickling\Backup\Databases\DatabaseInterface;
 
 class BaseCommand extends Command
@@ -16,7 +17,9 @@ class BaseCommand extends Command
 
 	protected function getDumpsPath()
 	{
-		return sprintf('%s/dumps/', storage_path());
+		$default = sprintf('%s/dumps/', storage_path());
+
+		return Config::get('database.dumps', $default);;
 	}
 
 }
