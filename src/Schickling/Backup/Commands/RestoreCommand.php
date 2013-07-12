@@ -46,6 +46,8 @@ class RestoreCommand extends BaseCommand
 		{
 			$this->line('Please select one of the following dumps:');
 
+			$finder->sortByName();
+
 			foreach ($finder as $dump)
 			{
 				$this->line($dump->getFilename());
