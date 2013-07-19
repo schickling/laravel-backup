@@ -67,7 +67,7 @@ class RestoreCommandTest extends TestCase
 
     public function testDumpListForEmptyFolder()
     {
-        $this->app->config->set('database.dumps', __DIR__ . '/resources/EmptyFolder');
+        $this->app->config->set('database.backup.path', __DIR__ . '/resources/EmptyFolder');
 
         $this->tester->execute(array());
 
@@ -76,7 +76,7 @@ class RestoreCommandTest extends TestCase
 
     public function testDumpListForNonEmptyFolder()
     {
-        $this->app->config->set('database.dumps', __DIR__ . '/resources/NonEmptyFolder');
+        $this->app->config->set('database.backup.path', __DIR__ . '/resources/NonEmptyFolder');
 
         $this->tester->execute(array());
 

@@ -19,7 +19,7 @@ class BaseCommand extends Command
 	{
 		$default = sprintf('%s/dumps/', storage_path());
 
-		return Config::get('database.dumps', $default);;
+		return Config::get('database.backup.path', $default);;
 	}
 
 }

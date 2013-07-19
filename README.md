@@ -33,22 +33,33 @@ php artisan db:restore dump.sql # restore dump.sql
 php artisan db:restore # list all dumps
 ```
 
-#### Custom dump folder
-If you want to change the default dump folder `app/storage/dumps`, you can specify it in your `app/config/database.php` by setting the 'dumps' key
-
+## Configuration
+You can configure the package by adding a `backup` section in your `app/config/database.php`
 ```php
     // ...
 
     'default' => 'mysql',
 
-    'dumps' => '/your/dump/folder'
+    /*
+    |--------------------------------------------------------------------------
+    | Backup settings
+    |--------------------------------------------------------------------------
+    |
+    */
+    'backup' => array(
+        'path'  => 'your/local/dump/folder',
+        's3'    => array(
+            'path'  => 'your/s3/dump/folder'
+            )
+        )
+
+    // ...
 ```
 
 ## TODO - Upcoming Features
 * `db:restore WRONGFILENAME` more detailed error message
 * `db:backup FILENAME` set title for dump
 * `db:backup --db CONNECTION` specify connection, default: default connection
-* Upload dump files to a S3 bucket
 * Compress dump files
 * More detailed folder checking (permission, existence, ...)
 * *Some more ideas? Tell me!*
