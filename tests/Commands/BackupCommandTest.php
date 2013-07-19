@@ -7,6 +7,22 @@ use Mockery as m;
 
 class BackupCommandTest extends TestCase
 {
+    private $databaseMock;
+    private $tester;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->databaseMock = m::mock('Schickling\Backup\Databases\DatabaseInterface');
+        $this->databaseMock->shouldReceive('getFileExtension')
+                           ->once()
+                           ->andReturn('sql');
+
+        $command = new BackupCommand($this->databaseMock);
+
+        $this->tester = new CommandTester($command);
+    }
 
     public function tearDown()
     {
@@ -22,41 +38,23 @@ class BackupCommandTest extends TestCase
 
     public function testSuccessfulBackup()
     {
-        $databaseMock = m::mock('Schickling\Backup\Databases\DatabaseInterface');
+        $this->databaseMock->shouldReceive('dump')
+                           ->once()
+                           ->andReturn(true);
 
-        $databaseMock->shouldReceive('dump')
-                     ->once()
-                     ->andReturn(true);
+        $this->tester->execute(array());
 
-        $databaseMock->shouldReceive('getFileExtension')
-                     ->once()
-                     ->andReturn('sql');
-
-        $command = new BackupCommand($databaseMock);
-
-        $tester = new CommandTester($command);
-        $tester->execute(array());
-
-        $this->assertRegExp("/^Database backup was successful. [0-9]{14}.sql was saved in the dumps folder.$/", $tester->getDisplay());
+        $this->assertRegExp("/^Database backup was successful. [0-9]{14}.sql was saved in the dumps folder.$/", $this->tester->getDisplay());
     }
 
     public function testFailingBackup()
     {
-        $databaseMock = m::mock('Schickling\Backup\Databases\DatabaseInterface');
+        $this->databaseMock->shouldReceive('dump')
+                           ->once()
+                           ->andReturn(false);
 
-        $databaseMock->shouldReceive('dump')
-                     ->once()
-                     ->andReturn(false);
+        $this->tester->execute(array());
 
-        $databaseMock->shouldReceive('getFileExtension')
-                     ->once()
-                     ->andReturn('sql');
-
-        $command = new BackupCommand($databaseMock);
-
-        $tester = new CommandTester($command);
-        $tester->execute(array());
-
-        $this->assertEquals("Database backup failed\n", $tester->getDisplay());
+        $this->assertEquals("Database backup failed\n", $this->tester->getDisplay());
     }
 }
