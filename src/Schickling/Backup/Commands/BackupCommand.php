@@ -20,12 +20,13 @@ class BackupCommand extends BaseCommand
 
 		if ($this->database->dump($this->filePath))
 		{
+			$this->line(sprintf('Database backup was successful. %s was saved in the dumps folder.', $this->fileName));
+
 			if ($this->option('upload-s3'))
 			{
 				$this->uploadS3();
+				$this->line('Upload complete.');
 			}
-
-			$this->line(sprintf('Database backup was successful. %s was saved in the dumps folder.', $this->fileName));
 		}
 		else
 		{

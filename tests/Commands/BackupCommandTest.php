@@ -84,5 +84,10 @@ class BackupCommandTest extends TestCase
         $this->tester->execute(array(
             '--upload-s3' => 'bucket-title'
             ));
+
+        $lines = explode("\n", $this->tester->getDisplay());
+        $this->assertRegExp("/^Database backup was successful. [0-9]{14}.sql was saved in the dumps folder.$/", $lines[0]);
+        $this->assertEquals("Upload complete.", $lines[1]);
+
     }
 }
