@@ -25,12 +25,22 @@ Creates a dump file in `app/storage/dumps`
 php artisan db:backup
 ```
 
+##### Upload to AWS S3
+```
+php artisan db:backup --upload-s3 your-bucket
+```
+
 #### Restore
 Paths are relative to the app/storage/dumps folder.
+
+##### Restore a dump
 ```
 php artisan db:restore dump.sql # restore dump.sql
+```
 
-php artisan db:restore # list all dumps
+##### List dumps
+```
+php artisan db:restore
 ```
 
 ## Configuration
