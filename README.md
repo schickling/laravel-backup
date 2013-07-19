@@ -71,5 +71,8 @@ You can configure the package by adding a `backup` section in your `app/config/d
 * `db:backup FILENAME` set title for dump
 * `db:backup --db CONNECTION` specify connection, default: default connection
 * Compress dump files
+* S3
+ * Upload as default
+ * default bucket
 * More detailed folder checking (permission, existence, ...)
 * *Some more ideas? Tell me!*
