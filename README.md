@@ -50,4 +50,5 @@ If you want to change the default dump folder `app/storage/dumps`, you can speci
 * `db:backup --db CONNECTION` specify connection, default: default connection
 * Upload dump files to a S3 bucket
 * Compress dump files
+* More detailed folder checking (permission, existence, ...)
 * *Some more ideas? Tell me!*
