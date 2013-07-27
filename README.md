@@ -61,7 +61,7 @@ You can configure the package by adding a `backup` section in your `app/config/d
         's3'    => array(
             'path'  => 'your/s3/dump/folder'
             )
-        )
+        ),
 
     // ...
 ```
