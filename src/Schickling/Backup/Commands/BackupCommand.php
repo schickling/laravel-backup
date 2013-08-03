@@ -57,14 +57,14 @@ class BackupCommand extends BaseCommand
 		$s3 = AWS::get('s3');
 		$s3->putObject(array(
 			'Bucket'     => $bucket,
-			'Key'        => $this->getS3DumpsPath() . $this->fileName,
+			'Key'        => $this->getS3DumpsPath() . '/' . $this->fileName,
 			'SourceFile' => $this->filePath,
 		));
 	}
 
 	protected function getS3DumpsPath()
 	{
-		$default = 'dumps/';
+		$default = 'dumps';
 
 		return Config::get('database.backup.s3.path', $default);;
 	}
