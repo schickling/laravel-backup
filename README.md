@@ -76,3 +76,7 @@ You can configure the package by adding a `backup` section in your `app/config/d
  * default bucket
 * More detailed folder checking (permission, existence, ...)
 * *Some more ideas? Tell me!*
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/schickling/laravel-backup/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
