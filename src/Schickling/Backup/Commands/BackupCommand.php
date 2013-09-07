@@ -1,6 +1,7 @@
 <?php namespace Schickling\Backup\Commands;
 
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 use AWS;
 use Config;
 
@@ -14,14 +15,46 @@ class BackupCommand extends BaseCommand
 	public function fire()
 	{
 		$this->checkDumpFolder();
-		
-		$this->fileName = date('YmdHis') . '.' .$this->database->getFileExtension();
-		$this->filePath = $this->getDumpsPath() . $this->fileName;
+
+		if ($this->argument('filename'))
+		{
+			// Is it an absolute path?
+			if (substr($this->argument('filename'), 0, 1) == '/')
+			{
+				$this->filePath = $this->argument('filename');
+				$this->fileName = basename($this->filePath);
+			}
+			// Is it relative path?
+			else if (strpos($this->argument('filename'), '/') !== false) 
+			{
+				$this->filePath = getcwd() . '/' . $this->argument('filename');
+				$this->fileName = basename($this->filePath);
+			}
+			// It's a basename:
+			else
+			{
+				$this->fileName = $this->argument('filename');
+				$this->filePath = rtrim($this->getDumpsPath(), '/') . '/' . $this->fileName;
+			}
+		}
+		else
+		{
+			$this->fileName = date('YmdHis') . '.' .$this->database->getFileExtension();
+			$this->filePath = rtrim($this->getDumpsPath(), '/') . '/' . $this->fileName;
+		}
+
 		$status = $this->database->dump($this->filePath);
 
 		if ($status === true)
 		{
-			$this->line(sprintf('Database backup was successful. %s was saved in the dumps folder.', $this->fileName));
+			if ($this->argument('filename'))
+			{
+				$this->line(sprintf('Database backup was successful. Saved to %s', $this->filePath));
+			}
+			else
+			{
+				$this->line(sprintf('Database backup was successful. %s was saved in the dumps folder.', $this->fileName));
+			}
 
 			if ($this->option('upload-s3'))
 			{
@@ -34,6 +67,18 @@ class BackupCommand extends BaseCommand
 			$this->line(sprintf('Database backup failed. %s', $status));
 		}
 	}
+
+	/**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return array(
+            array('filename', InputArgument::OPTIONAL, 'Filename or -path for the dump.'),
+        );
+    }
 
 	protected function getOptions()
 	{
