@@ -23,7 +23,7 @@ class SqliteDatabaseTest extends \PHPUnit_Framework_TestCase
     public function testDump()
     {
         $this->console->shouldReceive('run')
-                      ->with('cp "testDatabase.sqlite" "testfile.sqlite"')
+                      ->with("cp 'testDatabase.sqlite' 'testfile.sqlite'")
                       ->once()
                       ->andReturn(true);
 
@@ -33,7 +33,7 @@ class SqliteDatabaseTest extends \PHPUnit_Framework_TestCase
     public function testDumpFails()
     {
         $this->console->shouldReceive('run')
-                      ->with('cp "testDatabase.sqlite" "testfile.sqlite"')
+                      ->with("cp 'testDatabase.sqlite' 'testfile.sqlite'")
                       ->once()
                       ->andReturn(false);
 
@@ -43,7 +43,7 @@ class SqliteDatabaseTest extends \PHPUnit_Framework_TestCase
     public function testRestore()
     {
         $this->console->shouldReceive('run')
-                      ->with('cp -f "testfile.sqlite" "testDatabase.sqlite"')
+                      ->with("cp -f 'testfile.sqlite' 'testDatabase.sqlite'")
                       ->once()
                       ->andReturn(true);
 
@@ -53,7 +53,7 @@ class SqliteDatabaseTest extends \PHPUnit_Framework_TestCase
     public function testRestoreFails()
     {
         $this->console->shouldReceive('run')
-                      ->with('cp -f "testfile.sqlite" "testDatabase.sqlite"')
+                      ->with("cp -f 'testfile.sqlite' 'testDatabase.sqlite'")
                       ->once()
                       ->andReturn(false);
 
