@@ -22,12 +22,12 @@ class MySQLDatabase implements DatabaseInterface
 
 	public function dump($destinationFile)
 	{
-		$command = sprintf('mysqldump --user="%s" --password="%s" --host="%s" "%s" > "%s"',
-			$this->user,
-			$this->password,
-			$this->host, 
-			$this->database,
-			$destinationFile
+		$command = sprintf('mysqldump --user=%s --password=%s --host=%s %s > %s',
+			escapeshellarg($this->user),
+			escapeshellarg($this->password),
+			escapeshellarg($this->host),
+			escapeshellarg($this->database),
+			escapeshellarg($destinationFile)
 		);
 
 		return $this->console->run($command);
@@ -35,12 +35,12 @@ class MySQLDatabase implements DatabaseInterface
 
 	public function restore($sourceFile)
 	{
-		$command = sprintf('mysql --user="%s" --password="%s" --host="%s" "%s" < "%s"',
-			$this->user,
-			$this->password,
-			$this->host, 
-			$this->database,
-			$sourceFile
+		$command = sprintf('mysql --user=%s --password=%s --host=%s %s < %s',
+			escapeshellarg($this->user),
+			escapeshellarg($this->password),
+			escapeshellarg($this->host),
+			escapeshellarg($this->database),
+			escapeshellarg($sourceFile)
 		);
 
 		return $this->console->run($command);
