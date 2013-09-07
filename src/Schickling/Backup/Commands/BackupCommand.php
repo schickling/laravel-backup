@@ -17,8 +17,9 @@ class BackupCommand extends BaseCommand
 		
 		$this->fileName = date('YmdHis') . '.' .$this->database->getFileExtension();
 		$this->filePath = $this->getDumpsPath() . $this->fileName;
+		$status = $this->database->dump($this->filePath);
 
-		if ($this->database->dump($this->filePath))
+		if ($status === true)
 		{
 			$this->line(sprintf('Database backup was successful. %s was saved in the dumps folder.', $this->fileName));
 
@@ -30,7 +31,7 @@ class BackupCommand extends BaseCommand
 		}
 		else
 		{
-			$this->line('Database backup failed');
+			$this->line(sprintf('Database backup failed. %s', $status));
 		}
 	}
 
@@ -59,7 +60,7 @@ class BackupCommand extends BaseCommand
 			'Bucket'     => $bucket,
 			'Key'        => $this->getS3DumpsPath() . '/' . $this->fileName,
 			'SourceFile' => $this->filePath,
-		));
+			));
 	}
 
 	protected function getS3DumpsPath()

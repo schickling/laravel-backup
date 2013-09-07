@@ -19,7 +19,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
 
     public function testFailure()
     {
-        $this->assertFalse($this->console->run('false'));
+        $this->assertTrue($this->console->run('false') !== true);
     }
 
 }

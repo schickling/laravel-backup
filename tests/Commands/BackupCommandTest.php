@@ -59,11 +59,11 @@ class BackupCommandTest extends TestCase
     {
         $this->databaseMock->shouldReceive('dump')
                            ->once()
-                           ->andReturn(false);
+                           ->andReturn('Error message');
 
         $this->tester->execute(array());
 
-        $this->assertEquals("Database backup failed\n", $this->tester->getDisplay());
+        $this->assertEquals("Database backup failed. Error message\n", $this->tester->getDisplay());
     }
 
     public function testUploadS3()

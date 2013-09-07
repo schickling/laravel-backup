@@ -7,8 +7,12 @@ class Console
 	public function run($command)
 	{
 		$process = new Process($command);
-        $process->run();
+		$process->run();
 
-        return $process->isSuccessful();
+		if ($process->isSuccessful()) {
+			return true;
+		} else {
+			return $process->getErrorOutput();
+		}
 	}
 }
