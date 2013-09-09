@@ -29,6 +29,7 @@ php artisan db:backup
 ```
 php artisan db:backup --upload-s3 your-bucket
 ```
+Uses the [aws/aws-sdk-php-laravel](https://github.com/aws/aws-sdk-php-laravel) package which needs to be [configured](https://github.com/aws/aws-sdk-php-laravel#configuration).
 
 #### Restore
 Paths are relative to the app/storage/dumps folder.
