@@ -15,9 +15,6 @@ class BackupCommandTest extends TestCase
         parent::setUp();
 
         $this->databaseMock = m::mock('Schickling\Backup\Databases\DatabaseInterface');
-        $this->databaseMock->shouldReceive('getFileExtension')
-                           ->once()
-                           ->andReturn('sql');
 
         $command = new BackupCommand($this->databaseMock);
 
@@ -46,6 +43,11 @@ class BackupCommandTest extends TestCase
 
     public function testSuccessfulBackup()
     {
+
+        $this->databaseMock->shouldReceive('getFileExtension')
+                           ->once()
+                           ->andReturn('sql');
+
         $this->databaseMock->shouldReceive('dump')
                            ->once()
                            ->andReturn(true);
@@ -57,6 +59,11 @@ class BackupCommandTest extends TestCase
 
     public function testFailingBackup()
     {
+
+        $this->databaseMock->shouldReceive('getFileExtension')
+                           ->once()
+                           ->andReturn('sql');
+
         $this->databaseMock->shouldReceive('dump')
                            ->once()
                            ->andReturn('Error message');
@@ -77,6 +84,10 @@ class BackupCommandTest extends TestCase
            ->with('s3')
            ->andReturn($s3Mock);
 
+        $this->databaseMock->shouldReceive('getFileExtension')
+                           ->once()
+                           ->andReturn('sql');
+
         $this->databaseMock->shouldReceive('dump')
                            ->once()
                            ->andReturn(true);
@@ -90,4 +101,43 @@ class BackupCommandTest extends TestCase
         $this->assertEquals("Upload complete.", $lines[1]);
 
     }
+
+    public function testAbsolutePathAsFilename()
+    {
+
+        $this->databaseMock->shouldReceive('getFileExtension')
+                           ->never();
+
+        $this->databaseMock->shouldReceive('dump')
+                           ->once()
+                           ->andReturn(true);
+
+        $filename = '/home/dummy/mydump.sql';
+
+        $this->tester->execute(array(
+            'filename' => $filename
+            ));
+
+        $this->assertEquals('Database backup was successful. Saved to ' . $filename . "\n", $this->tester->getDisplay());
+    }
+
+    public function testRelativePathAsFilename()
+    {
+
+        $this->databaseMock->shouldReceive('getFileExtension')
+                           ->never();
+
+        $this->databaseMock->shouldReceive('dump')
+                           ->once()
+                           ->andReturn(true);
+
+        $filename = 'dummy/mydump.sql';
+
+        $this->tester->execute(array(
+            'filename' => $filename
+            ));
+
+        $this->assertEquals('Database backup was successful. Saved to ' . getcwd() . '/' . $filename . "\n", $this->tester->getDisplay());
+    }
+
 }
