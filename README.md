@@ -69,8 +69,8 @@ You can configure the package by adding a `backup` section in your `app/config/d
 
 ## Dependencies
 
-### for MySQL
-You need to have `mysqldump` installed.
+#### ...for MySQL
+You need to have `mysqldump` installed. It's usually already installed with MySQL itself.
 
 ## TODO - Upcoming Features
 * `db:restore WRONGFILENAME` more detailed error message
