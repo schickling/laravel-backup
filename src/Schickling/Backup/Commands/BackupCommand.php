@@ -43,22 +43,22 @@ class BackupCommand extends BaseCommand
 		{
 			if ($this->argument('filename'))
 			{
-				$this->line(sprintf('Database backup was successful. Saved to %s', $this->filePath));
+				$this->line(sprintf($this->colors->getColoredString("\n".'Database backup was successful. Saved to %s'."\n",'green'), $this->filePath));
 			}
 			else
 			{
-				$this->line(sprintf('Database backup was successful. %s was saved in the dumps folder.', $this->fileName));
+				$this->line(sprintf($this->colors->getColoredString("\n".'Database backup was successful. %s was saved in the dumps folder.'."\n",'green'), $this->fileName));
 			}
 
 			if ($this->option('upload-s3'))
 			{
 				$this->uploadS3();
-				$this->line('Upload complete.');
+				$this->line($this->colors->getColoredString("\n".'Upload complete.'."\n",'green'));
 			}
 		}
 		else
 		{
-			$this->line(sprintf('Database backup failed. %s', $status));
+			$this->line(sprintf($this->colors->getColoredString("\n".'Database backup failed. %s'."\n",'red'), $status));
 		}
 	}
 
