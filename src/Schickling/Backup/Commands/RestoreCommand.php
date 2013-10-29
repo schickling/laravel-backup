@@ -27,13 +27,15 @@ class RestoreCommand extends BaseCommand
 	{
 		$sourceFile = $this->getDumpsPath() . $fileName;
 
-		if ($this->database->restore($sourceFile))
+		$status = $this->database->restore($sourceFile);
+		
+		if ($status === true)
 		{
-			$this->line(sprintf('%s was successfully restored.', $fileName));
+			$this->line(sprintf($this->colors->getColoredString("\n".'%s was successfully restored.'."\n",'green'), $fileName));
 		}
 		else
 		{
-			$this->line('Database restore failed.');
+			$this->line($this->colors->getColoredString("\n".'Database restore failed.'."\n",'red'));
 		}
 	}
 
@@ -44,18 +46,19 @@ class RestoreCommand extends BaseCommand
 
 		if ($finder->count() > 0)
 		{
-			$this->line('Please select one of the following dumps:');
+			$this->line($this->colors->getColoredString("\n".'Please select one of the following dumps:'."\n",'white'));
 
 			$finder->sortByName();
 
 			foreach ($finder as $dump)
 			{
-				$this->line($dump->getFilename());
+				$this->line($this->colors->getColoredString($dump->getFilename(),'brown'));
 			}
+			$this->line("");
 		}
 		else
 		{
-			$this->line('You haven\'t saved any dumps.');
+			$this->line($this->colors->getColoredString("\n".'You haven\'t saved any dumps.'."\n",'brown'));
 		}
 	}
 
