@@ -58,12 +58,20 @@ You can configure the package by adding a `backup` section in your `app/config/d
     |
     */
     'backup' => array(
-        'path'  => 'your/local/dump/folder',
+    	// add a backup folder in the app/database/ or your dump folder
+        'path'  => app_path().'/database/backup/',
+        // add the path to the restore and backup command of mysql
+        // this exemple is if your are using MAMP server on a mac
+        'mysql' => array(
+        			'dump_command_path' => '/Applications/MAMP/Library/bin/',
+        			'restore_command_path' => '/Applications/MAMP/Library/bin/',
+        		),
+        
         's3'    => array(
             'path'  => 'your/s3/dump/folder'
             )
-        ),
-
+    ),
+    
     // ...
 ```
 
