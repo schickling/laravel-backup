@@ -14,7 +14,7 @@ class BackupCommandTest extends TestCase
     {
         parent::setUp();
 
-        $this->databaseMock = m::mock('Schickling\Backup\Databases\DatabaseInterface');
+        $this->databaseMock = m::mock("Schickling\Backup\Databases\DatabaseInterface");
 
         $command = new BackupCommand($this->databaseMock);
 
@@ -54,7 +54,7 @@ class BackupCommandTest extends TestCase
 
         $this->tester->execute(array());
 
-        $this->assertRegExp("/^Database backup was successful. [0-9]{14}.sql was saved in the dumps folder.$/", $this->tester->getDisplay());
+        $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. [0-9]{14}.sql was saved in the dumps folder.(\\n)*(\\033\[0m)*$/", $this->tester->getDisplay());
     }
 
     public function testFailingBackup()
@@ -70,7 +70,7 @@ class BackupCommandTest extends TestCase
 
         $this->tester->execute(array());
 
-        $this->assertEquals("Database backup failed. Error message\n", $this->tester->getDisplay());
+        $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Database backup failed. Error message(\\n)*(\\033\[0m)*$/", $this->tester->getDisplay());
     }
 
     public function testUploadS3()
@@ -97,8 +97,8 @@ class BackupCommandTest extends TestCase
             ));
 
         $lines = explode("\n", $this->tester->getDisplay());
-        $this->assertRegExp("/^Database backup was successful. [0-9]{14}.sql was saved in the dumps folder.$/", $lines[0]);
-        $this->assertEquals("Upload complete.", $lines[1]);
+        $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. [0-9]{14}.sql was saved in the dumps folder.(\\n)*(\\033\[0m)*$/", $lines[0]);
+        $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Upload complete.(\\n)*(\\033\[0m)*$/", $lines[1]);
 
     }
 
@@ -118,7 +118,7 @@ class BackupCommandTest extends TestCase
             'filename' => $filename
             ));
 
-        $this->assertEquals('Database backup was successful. Saved to ' . $filename . "\n", $this->tester->getDisplay());
+        $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to " . $filename . "(\\n)*(\\033\[0m)*$/", $this->tester->getDisplay());
     }
 
     public function testRelativePathAsFilename()
@@ -137,7 +137,7 @@ class BackupCommandTest extends TestCase
             'filename' => $filename
             ));
 
-        $this->assertEquals('Database backup was successful. Saved to ' . getcwd() . '/' . $filename . "\n", $this->tester->getDisplay());
+        $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to " . getcwd() . "/" . $filename . "(\\n)*(\\033\[0m)*$/", $this->tester->getDisplay());
     }
 
 }
