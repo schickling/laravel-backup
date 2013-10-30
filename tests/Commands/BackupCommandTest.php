@@ -117,7 +117,7 @@ class BackupCommandTest extends TestCase
         $this->tester->execute(array(
             'filename' => $filename
             ));
-        $regex = "/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to " . $filename . "(\\n)*(\\033\[0m)*$/";
+        $regex = "/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to \/home\/dummy\/mydump.sql(\\n)*(\\033\[0m)*$/";
         $this->assertRegExp($regex, $this->tester->getDisplay()));
 
     }
@@ -137,7 +137,8 @@ class BackupCommandTest extends TestCase
         $this->tester->execute(array(
             'filename' => $filename
             ));
-        $regex = "/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to " . getcwd() . "/" . $filename . "(\\n)*(\\033\[0m)*$/";
+        $path = str_replace('/', '\/', getcwd());
+        $regex = "/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to " . $path . "\/dummy\/mydump.sql(\\n)*(\\033\[0m)*$/";
         $this->assertRegExp($regex, $this->tester->getDisplay());
     }
 
