@@ -118,7 +118,7 @@ class BackupCommandTest extends TestCase
             'filename' => $filename
             ));
         $regex = "/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to \/home\/dummy\/mydump.sql(\\n)*(\\033\[0m)*$/";
-        $this->assertRegExp($regex, $this->tester->getDisplay()));
+        $this->assertRegExp($regex, $this->tester->getDisplay());
 
     }
 
