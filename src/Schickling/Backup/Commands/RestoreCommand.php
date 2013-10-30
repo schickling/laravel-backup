@@ -49,12 +49,17 @@ class RestoreCommand extends BaseCommand
 			$this->line($this->colors->getColoredString("\n".'Please select one of the following dumps:'."\n",'white'));
 
 			$finder->sortByName();
-
+			$count = count($finder);
+			$i=0;
 			foreach ($finder as $dump)
 			{
-				$this->line($this->colors->getColoredString($dump->getFilename(),'brown'));
+				$i++;
+				if($i!=$count){
+					$this->line($this->colors->getColoredString($dump->getFilename(),'brown'));
+				}else{
+					$this->line($this->colors->getColoredString($dump->getFilename()."\n",'brown'));
+				}
 			}
-			$this->line("");
 		}
 		else
 		{

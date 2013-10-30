@@ -96,9 +96,7 @@ class BackupCommandTest extends TestCase
             '--upload-s3' => 'bucket-title'
             ));
 
-        $lines = explode("\n", $this->tester->getDisplay());
-        $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. [0-9]{14}.sql was saved in the dumps folder.(\\n)*(\\033\[0m)*$/", $lines[0]);
-        $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Upload complete.(\\n)*(\\033\[0m)*$/", $lines[1]);
+        $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. [0-9]{14}.sql was saved in the dumps folder.(\\n)*(\\033\[0m)*(\\033\[[0-9;]*m)*(\\n)*Upload complete.(\\n)*(\\033\[0m)*$/", $this->tester->getDisplay());
 
     }
 
