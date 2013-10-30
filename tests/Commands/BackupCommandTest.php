@@ -117,8 +117,9 @@ class BackupCommandTest extends TestCase
         $this->tester->execute(array(
             'filename' => $filename
             ));
+        $regex = "/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to " . $filename . "(\\n)*(\\033\[0m)*$/";
+        $this->assertRegExp($regex, $this->tester->getDisplay()));
 
-        $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to " . $filename . "(\\n)*(\\033\[0m)*$/", $this->tester->getDisplay());
     }
 
     public function testRelativePathAsFilename()
@@ -136,8 +137,8 @@ class BackupCommandTest extends TestCase
         $this->tester->execute(array(
             'filename' => $filename
             ));
-
-        $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to " . getcwd() . "/" . $filename . "(\\n)*(\\033\[0m)*$/", $this->tester->getDisplay());
+        $regex = "/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to " . getcwd() . "/" . $filename . "(\\n)*(\\033\[0m)*$/";
+        $this->assertRegExp($regex, $this->tester->getDisplay());
     }
 
 }
