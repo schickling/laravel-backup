@@ -45,7 +45,7 @@ php artisan db:restore
 ```
 
 ## Configuration
-You can configure the package by adding a `backup` section in your `app/config/database.php`
+You can configure the package by adding a `backup` section in your `app/config/database.php`. __All settings are optional and have default values.__
 ```php
     // ...
 
@@ -63,10 +63,10 @@ You can configure the package by adding a `backup` section in your `app/config/d
         // add the path to the restore and backup command of mysql
         // this exemple is if your are using MAMP server on a mac
         'mysql' => array(
-        			'dump_command_path' => '/Applications/MAMP/Library/bin/',
-        			'restore_command_path' => '/Applications/MAMP/Library/bin/',
-        		),
-        
+    			'dump_command_path' => '/Applications/MAMP/Library/bin/',
+    			'restore_command_path' => '/Applications/MAMP/Library/bin/',
+    		),
+        // s3 settings
         's3'    => array(
             'path'  => 'your/s3/dump/folder'
             )
