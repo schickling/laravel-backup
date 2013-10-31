@@ -45,7 +45,9 @@ php artisan db:restore
 ```
 
 ## Configuration
-You can configure the package by adding a `backup` section in your `app/config/database.php`. __All settings are optional and have default values.__
+You can configure the package by adding a `backup` section in your `app/config/database.php`.
+
+__All settings are optional and have default values.__
 ```php
     // ...
 
