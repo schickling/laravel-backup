@@ -3,15 +3,17 @@
 use Illuminate\Console\Command;
 use Config;
 use Schickling\Backup\Databases\DatabaseInterface;
+use Schickling\Backup\ConsoleColors;
 
 class BaseCommand extends Command
 {
 	protected $database;
+	protected $colors;
 
 	public function __construct(DatabaseInterface $database)
 	{
 		parent::__construct();
-
+		$this->colors = new ConsoleColors();
 		$this->database = $database;
 	}
 
