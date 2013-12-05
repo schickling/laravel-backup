@@ -1,5 +1,6 @@
 <?php namespace Schickling\Backup\Commands;
 
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Finder\Finder;
 
@@ -9,8 +10,12 @@ class RestoreCommand extends BaseCommand
 
 	protected $description = 'Restore a dump from `app/storage/dumps`';
 
+	protected $database;
+
 	public function fire()
 	{		
+		$this->database = $this->getDatabase($this->input->getOption('database'));
+
 		$fileName = $this->argument('dump');
 		
 		if ($fileName)
@@ -26,6 +31,7 @@ class RestoreCommand extends BaseCommand
 	protected function restoreDump($fileName)
 	{
 		$sourceFile = $this->getDumpsPath() . $fileName;
+
 
 		if ($this->database->restore($sourceFile))
 		{
@@ -63,6 +69,13 @@ class RestoreCommand extends BaseCommand
 	{
 		return array(
 			array('dump', InputArgument::OPTIONAL, 'Filename of the dump')
+			);
+	}
+
+	protected function getOptions()
+	{
+		return array(
+			array('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to restore to'),
 			);
 	}
 

@@ -11,17 +11,17 @@ class BackupServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$databaseBuilder = new DatabaseBuilder($this->app->config['database']);
-		$database = $databaseBuilder->getDatabase();
 
-		$this->app['db.backup'] = $this->app->share(function($app) use ($database)
+		$databaseBuilder = new DatabaseBuilder();
+
+		$this->app['db.backup'] = $this->app->share(function($app) use ($databaseBuilder)
 		{
-			return new Commands\BackupCommand($database);
+			return new Commands\BackupCommand($databaseBuilder);
 		});
 
-		$this->app['db.restore'] = $this->app->share(function($app) use ($database)
+		$this->app['db.restore'] = $this->app->share(function($app) use ($databaseBuilder)
 		{
-			return new Commands\RestoreCommand($database);
+			return new Commands\RestoreCommand($databaseBuilder);
 		});
 
 		$this->commands(

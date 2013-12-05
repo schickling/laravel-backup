@@ -5,12 +5,13 @@ class DatabaseBuilder
 	protected $database;
 	protected $console;
 
-	public function __construct(array $config)
+	public function __construct()
 	{
 		$this->console = new Console();
+	}
 
-		$default = $config['default'];
-		$realConfig = $config['connections'][$default];
+	public function getDatabase(array $realConfig)
+	{
 
 		switch ($realConfig['driver'])
 		{
@@ -30,10 +31,7 @@ class DatabaseBuilder
 			throw new \Exception('Database driver not supported yet');
 			break;
 		}
-	}
 
-	public function getDatabase()
-	{
 		return $this->database;
 	}
 

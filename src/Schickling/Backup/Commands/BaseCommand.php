@@ -2,17 +2,23 @@
 
 use Illuminate\Console\Command;
 use Config;
-use Schickling\Backup\Databases\DatabaseInterface;
+use Schickling\Backup\DatabaseBuilder;
 
 class BaseCommand extends Command
 {
-	protected $database;
+	protected $databaseBuilder;
 
-	public function __construct(DatabaseInterface $database)
+	public function __construct(DatabaseBuilder $databaseBuilder)
 	{
 		parent::__construct();
+		$this->databaseBuilder = $databaseBuilder;
+	}
 
-		$this->database = $database;
+	public function getDatabase($database)
+	{
+		$database = $database ?: Config::get('database.default');
+		$realConfig = Config::get("database.connections.$database");
+		return $this->databaseBuilder->getDatabase($realConfig);
 	}
 
 	protected function getDumpsPath()

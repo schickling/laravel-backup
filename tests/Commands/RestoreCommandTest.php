@@ -15,8 +15,12 @@ class RestoreCommandTest extends TestCase
         parent::setUp();
 
         $this->databaseMock = m::mock('Schickling\Backup\Databases\DatabaseInterface');
+        $this->databaseBuilderMock = m::mock('Schickling\Backup\DatabaseBuilder');
+        $this->databaseBuilderMock->shouldReceive('getDatabase')
+                           ->once()
+                           ->andReturn($this->databaseMock);
 
-        $command = new RestoreCommand($this->databaseMock);
+        $command = new RestoreCommand($this->databaseBuilderMock);
 
         $this->tester = new CommandTester($command);
     }
