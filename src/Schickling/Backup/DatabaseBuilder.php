@@ -44,7 +44,8 @@ class DatabaseBuilder
 			$config['database'],
 			$config['username'],
 			$config['password'],
-			$config['host']
+			$config['host'],
+			$config['port']
 			);
 	}
 
