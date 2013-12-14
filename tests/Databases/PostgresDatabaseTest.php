@@ -12,7 +12,7 @@ class PostgresDatabaseTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->console = m::mock('Schickling\Backup\Console');
-        $this->database = new PostgresDatabase($this->console, 'testDatabase', 'testUser', 'password');
+        $this->database = new PostgresDatabase($this->console, 'testDatabase', 'testUser', 'password', 'localhost');
     }
 
     public function tearDown()

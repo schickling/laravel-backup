@@ -13,7 +13,7 @@ class MySQLDatabase implements DatabaseInterface
 	protected $host;
 	protected $port;
 
-	public function __construct(Console $console, $database, $user, $password, $host = 'localhost', $port = '3306')
+	public function __construct(Console $console, $database, $user, $password, $host, $port)
 	{
 		$this->console = $console;
 		$this->database = $database;

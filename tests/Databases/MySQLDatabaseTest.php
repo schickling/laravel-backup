@@ -12,7 +12,7 @@ class MySQLDatabaseTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->console = m::mock('Schickling\Backup\Console');
-        $this->database = new MySQLDatabase($this->console, 'testDatabase', 'testUser', 'password');
+        $this->database = new MySQLDatabase($this->console, 'testDatabase', 'testUser', 'password', 'localhost', '3306');
     }
 
     public function tearDown()
