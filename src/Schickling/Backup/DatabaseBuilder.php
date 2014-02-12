@@ -37,12 +37,14 @@ class DatabaseBuilder
 
 	protected function buildMySQL(array $config)
 	{
+		$port = isset($config['port']) ? $config['port'] : 3306;
 		$this->database = new Databases\MySQLDatabase(
 			$this->console,
 			$config['database'],
 			$config['username'],
 			$config['password'],
-			$config['host']
+			$config['host'],
+			$port
 			);
 	}
 

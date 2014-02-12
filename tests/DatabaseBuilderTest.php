@@ -13,6 +13,7 @@ class DatabaseBuilderTest extends \PHPUnit_Framework_TestCase
                     'database'  => 'database',
                     'username'  => 'root',
                     'password'  => '',
+                    'port'      => '3307',
                     );
 
         $databaseBuilder = new DatabaseBuilder();

@@ -11,7 +11,7 @@ class PostgresDatabase implements DatabaseInterface
 	protected $password;
 	protected $host;
 
-	public function __construct(Console $console, $database, $user, $password, $host = 'localhost')
+	public function __construct(Console $console, $database, $user, $password, $host)
 	{
 		$this->console = $console;
 		$this->database = $database;
