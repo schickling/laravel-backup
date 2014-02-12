@@ -32,7 +32,9 @@ class RestoreCommand extends BaseCommand
 	{
 		$sourceFile = $this->getDumpsPath() . $fileName;
 
-		if ($this->database->restore($sourceFile))
+		$status = $this->database->restore($sourceFile);
+		
+		if ($status === true)
 		{
 			$this->line(sprintf($this->colors->getColoredString("\n".'%s was successfully restored.'."\n",'green'), $fileName));
 		}
@@ -81,7 +83,7 @@ class RestoreCommand extends BaseCommand
 	{
 		return array(
 			array('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to restore to'),
-			);
+		);
 	}
 
 }
