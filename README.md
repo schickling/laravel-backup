@@ -21,13 +21,18 @@ Backup and restore database support for Laravel 4 applications
 
 #### Backup
 Creates a dump file in `app/storage/dumps`
+```sh
+$ php artisan db:backup
 ```
-php artisan db:backup
+
+###### Use specific database
+```sh
+$ php artisan db:backup --database=mysql
 ```
 
 ###### Upload to AWS S3
-```
-php artisan db:backup --upload-s3 your-bucket
+```sh
+$ php artisan db:backup --upload-s3 your-bucket
 ```
 Uses the [aws/aws-sdk-php-laravel](https://github.com/aws/aws-sdk-php-laravel) package which needs to be [configured](https://github.com/aws/aws-sdk-php-laravel#configuration).
 
@@ -35,13 +40,13 @@ Uses the [aws/aws-sdk-php-laravel](https://github.com/aws/aws-sdk-php-laravel) p
 Paths are relative to the app/storage/dumps folder.
 
 ###### Restore a dump
-```
-php artisan db:restore dump.sql
+```sh
+$ php artisan db:restore dump.sql
 ```
 
 ###### List dumps
-```
-php artisan db:restore
+```sh
+$ php artisan db:restore
 ```
 
 ## Configuration
@@ -85,7 +90,6 @@ You need to have `mysqldump` installed. It's usually already installed with MySQ
 ## TODO - Upcoming Features
 * `db:restore WRONGFILENAME` more detailed error message
 * `db:backup FILENAME` set title for dump
-* `db:backup --db CONNECTION` specify connection, default: default connection
 * Compress dump files
 * S3
  * Upload as default
