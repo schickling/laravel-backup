@@ -5,79 +5,61 @@ use Schickling\Backup\DatabaseBuilder;
 class DatabaseBuilderTest extends \PHPUnit_Framework_TestCase
 {
 
-    protected $databaseBuilder;
-
     public function testMySQL()
     {
         $config = array(
-            'default'       => 'mysqlTest',
-            'connections'   => array(
-                'mysqlTest' => array(
                     'driver'    => 'mysql',
                     'host'      => 'localhost',
                     'database'  => 'database',
                     'username'  => 'root',
                     'password'  => '',
                     'port'      => '3307',
-                    )
-                )
-            );
+                    );
 
-        $this->databaseBuilder = new DatabaseBuilder($config);
+        $databaseBuilder = new DatabaseBuilder();
+        $database = $databaseBuilder->getDatabase($config);
 
-        $this->assertInstanceOf('Schickling\Backup\Databases\MySQLDatabase', $this->databaseBuilder->getDatabase());
+        $this->assertInstanceOf('Schickling\Backup\Databases\MySQLDatabase', $database);
     }
 
     public function testSqlite()
     {
         $config = array(
-            'default'       => 'sqliteTest',
-            'connections'   => array(
-                'sqliteTest' => array(
                     'driver'   => 'sqlite',
                     'database' => __DIR__.'/../database/production.sqlite',
-                    )
-                )
-            );
+                    );
 
-        $this->databaseBuilder = new DatabaseBuilder($config);
+        $databaseBuilder = new DatabaseBuilder();
+        $database = $databaseBuilder->getDatabase($config);
 
-        $this->assertInstanceOf('Schickling\Backup\Databases\SqliteDatabase', $this->databaseBuilder->getDatabase());
+        $this->assertInstanceOf('Schickling\Backup\Databases\SqliteDatabase', $database);
     }
 
     public function testPostgres() {
         $config = array(
-            'default'       => 'postgresTest',
-            'connections'   => array(
-                'postgresTest' => array(
                     'driver'    => 'pgsql',
                     'host'      => 'localhost',
                     'database'  => 'database',
                     'username'  => 'root',
                     'password'  => 'paso',
-                    )
-                )
-            );
+                    );
 
-        $this->databaseBuilder = new DatabaseBuilder($config);
+        $databaseBuilder = new DatabaseBuilder();
+        $database = $databaseBuilder->getDatabase($config);
 
-        $this->assertInstanceOf('Schickling\Backup\Databases\PostgresDatabase', $this->databaseBuilder->getDatabase());
+        $this->assertInstanceOf('Schickling\Backup\Databases\PostgresDatabase', $database);
     }
 
     public function testUnsupported()
     {
         $config = array(
-            'default'       => 'unsupportedTest',
-            'connections'   => array(
-                'unsupportedTest' => array(
                     'driver'   => 'unsupported',
-                    )
-                )
-            );
+                    );
 
         $this->setExpectedException('Exception');
 
-        $this->databaseBuilder = new DatabaseBuilder($config);
+        $databaseBuilder = new DatabaseBuilder();
+        $database = $databaseBuilder->getDatabase($config);
     }
 
 }

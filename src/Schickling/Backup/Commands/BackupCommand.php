@@ -14,6 +14,7 @@ class BackupCommand extends BaseCommand
 
 	public function fire()
 	{
+		$database = $this->getDatabase($this->input->getOption('database'));
 		$this->checkDumpFolder();
 
 		if ($this->argument('filename'))
@@ -33,11 +34,11 @@ class BackupCommand extends BaseCommand
 		}
 		else
 		{
-			$this->fileName = date('YmdHis') . '.' .$this->database->getFileExtension();
+			$this->fileName = date('YmdHis') . '.' .$database->getFileExtension();
 			$this->filePath = rtrim($this->getDumpsPath(), '/') . '/' . $this->fileName;
 		}
 
-		$status = $this->database->dump($this->filePath);
+		$status = $database->dump($this->filePath);
 
 		if ($status === true)
 		{
@@ -77,6 +78,7 @@ class BackupCommand extends BaseCommand
 	protected function getOptions()
 	{
 		return array(
+			array('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to backup'),
 			array('upload-s3', 'u', InputOption::VALUE_REQUIRED, 'Upload the dump to your S3 bucket')
 			);
 	}
