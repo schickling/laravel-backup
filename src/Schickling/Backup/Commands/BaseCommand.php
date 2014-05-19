@@ -13,22 +13,22 @@ class BaseCommand extends Command
 	public function __construct(DatabaseBuilder $databaseBuilder)
 	{
 		parent::__construct();
+
 		$this->databaseBuilder = $databaseBuilder;
 		$this->colors = new ConsoleColors();
 	}
 
 	public function getDatabase($database)
 	{
-		$database = $database ?: Config::get('database.default');
-		$realConfig = Config::get("database.connections.$database");
+		$database = $database ? : Config::get('database.default');
+		$realConfig = Config::get('database.connections.' . $database);
+
 		return $this->databaseBuilder->getDatabase($realConfig);
 	}
 
 	protected function getDumpsPath()
 	{
-		$default = sprintf('%s/dumps/', storage_path());
-
-		return Config::get('database.backup.path', $default);;
+		return Config::get('backup::path');
 	}
 
 }

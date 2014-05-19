@@ -60,16 +60,12 @@ class MySQLDatabase implements DatabaseInterface
 
 	protected function getDumpCommandPath()
 	{
-		$default = '';
-
-		return Config::get('database.backup.mysql.dump_command_path', $default);;
+		return Config::get('backup::mysql.dump_command_path');;
 	}
 
 	protected function getRestoreCommandPath()
 	{
-		$default = '';
-
-		return Config::get('database.backup.mysql.restore_command_path', $default);;
+		return Config::get('backup::mysql.restore_command_path');;
 	}
 
 }

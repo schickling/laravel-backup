@@ -108,7 +108,7 @@ class BackupCommand extends BaseCommand
 	{
 		$default = 'dumps';
 
-		return Config::get('database.backup.s3.path', $default);;
+		return Config::get('backup::s3.path', $default);;
 	}
 
 }

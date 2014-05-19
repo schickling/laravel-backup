@@ -50,38 +50,32 @@ $ php artisan db:restore
 ```
 
 ## Configuration
-You can configure the package by adding a `backup` section in your `app/config/database.php`.
+Since version `0.5.0` this package follows the recommended standard for configuration. In order to configure this package please run the following command:
 
-__All settings are optional and have default values.__
+```sh
+$ php artisan config:publish schickling/backup
+```
+
+__All settings are optional and have reasonable default values.__
 ```php
-    // ...
 
-    'default' => 'mysql',
+	// add a backup folder in the app/database/ or your dump folder
+    'path' => app_path() . '/database/backup/',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Backup settings
-    |--------------------------------------------------------------------------
-    |
-    */
-    'backup' => array(
-    	// add a backup folder in the app/database/ or your dump folder
-        'path'  => app_path().'/database/backup/',
-        // add the path to the restore and backup command of mysql
-        // this exemple is if your are using MAMP server on a mac
-        // on windows: 'C:\\...\\mysql\\bin\\'
-        // trailing slash is required
-        'mysql' => array(
-    			'dump_command_path' => '/Applications/MAMP/Library/bin/',
-    			'restore_command_path' => '/Applications/MAMP/Library/bin/',
-    		),
-        // s3 settings
-        's3'    => array(
-            'path'  => 'your/s3/dump/folder'
-            )
-    ),
-    
-    // ...
+    // add the path to the restore and backup command of mysql
+    // this exemple is if your are using MAMP server on a mac
+    // on windows: 'C:\\...\\mysql\\bin\\'
+    // trailing slash is required
+    'mysql' => array(
+			'dump_command_path' => '/Applications/MAMP/Library/bin/',
+			'restore_command_path' => '/Applications/MAMP/Library/bin/',
+		),
+
+    // s3 settings
+    's3' => array(
+        'path'  => 'your/s3/dump/folder'
+        )
+
 ```
 
 ## Dependencies
