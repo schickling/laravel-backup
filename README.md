@@ -60,6 +60,7 @@ __All settings are optional and have reasonable default values.__
 ```php
 
 return array(
+
 	// add a backup folder in the app/database/ or your dump folder
     'path' => app_path() . '/database/backup/',
 
@@ -77,7 +78,6 @@ return array(
         'path'  => 'your/s3/dump/folder'
         )
 );
-
 ```
 
 ## Dependencies
