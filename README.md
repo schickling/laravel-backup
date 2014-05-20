@@ -59,6 +59,7 @@ $ php artisan config:publish schickling/backup
 __All settings are optional and have reasonable default values.__
 ```php
 
+return array(
 	// add a backup folder in the app/database/ or your dump folder
     'path' => app_path() . '/database/backup/',
 
@@ -75,6 +76,7 @@ __All settings are optional and have reasonable default values.__
     's3' => array(
         'path'  => 'your/s3/dump/folder'
         )
+);
 
 ```
 
