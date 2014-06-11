@@ -58,6 +58,6 @@ class PostgresDatabase implements DatabaseInterface
 
 	protected function getExcludedTables()
 	{
-		return Config::get('backup::postgres.exclude_table_data', []);
+		return Config::get('backup::postgres.exclude_table_data', array());
 	}
 }
