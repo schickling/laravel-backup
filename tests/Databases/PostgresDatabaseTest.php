@@ -23,7 +23,7 @@ class PostgresDatabaseTest extends \PHPUnit_Framework_TestCase
     public function testDump()
     {
         $this->console->shouldReceive('run')
-                      ->with("PGPASSWORD='password' pg_dump -Fc --no-acl --no-owner -h 'localhost' -U 'testUser' 'testDatabase' > 'testfile.dump'")
+                      ->with("PGPASSWORD='password' pg_dump -Fc --no-acl --no-owner  -h 'localhost' -U 'testUser' 'testDatabase' > 'testfile.dump'")
                       ->once()
                       ->andReturn(true);
 
@@ -33,7 +33,7 @@ class PostgresDatabaseTest extends \PHPUnit_Framework_TestCase
     public function testDumpFails()
     {
         $this->console->shouldReceive('run')
-                      ->with("PGPASSWORD='password' pg_dump -Fc --no-acl --no-owner -h 'localhost' -U 'testUser' 'testDatabase' > 'testfile.dump'")
+                      ->with("PGPASSWORD='password' pg_dump -Fc --no-acl --no-owner  -h 'localhost' -U 'testUser' 'testDatabase' > 'testfile.dump'")
                       ->once()
                       ->andReturn(false);
 
