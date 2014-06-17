@@ -55,6 +55,8 @@ class BackupCommand extends BaseCommand
 			{
 				$this->uploadS3();
 				$this->line($this->colors->getColoredString("\n".'Upload complete.'."\n",'green'));
+				$deleted = $this->deleteS3();
+				$this->line($this->colors->getColoredString("\n" . $deleted . ' S3 backups deleted.'."\n",'green'));
 			}
 		}
 		else
@@ -103,12 +105,53 @@ class BackupCommand extends BaseCommand
 			'SourceFile' => $this->filePath,
 			));
 	}
+	
+	protected function deleteS3()
+	{
+		$bucket = $this->option('upload-s3');
+		$s3 = AWS::get('s3');
+		$limit = $this->getS3BackupLimit();
+		
+		$iterator = $s3->getIterator('ListObjects', array(
+			'Bucket' => $bucket
+			));
+			
+		$response = $iterator->toArray();
+		
+		$files = array();
+		foreach($response as $file)
+		{
+			array_push($files, $file['Key']);
+		}
+		
+		if ($limit == '' || count( $files ) <= $limit)
+			return;
+		
+		krsort( $files );
+
+		$toDelete = array_slice($files, $limit);
+		
+		foreach ($toDelete as $fileKey)
+			$response = $s3->deleteObject(array(
+				'Bucket' => $bucket,
+				'Key'    => $fileKey
+				));
+		
+		return count($toDelete);
+	}
+	
+	protected function getS3BackupLimit()
+	{
+		$default = 365;
+		
+		return Config::get('backup::s3.maximum_backups', $default);
+	}
 
 	protected function getS3DumpsPath()
 	{
 		$default = 'dumps';
 
-		return Config::get('backup::s3.path', $default);;
+		return Config::get('backup::s3.path', $default);
 	}
 
 }

@@ -75,7 +75,8 @@ return array(
 
     // s3 settings
     's3' => array(
-        'path'  => 'your/s3/dump/folder'
+        'path'  => 'your/s3/dump/folder',
+        'maximum_backups' => 365
         )
 );
 ```

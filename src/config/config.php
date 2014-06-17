@@ -10,7 +10,8 @@ return array(
 		),
 
 	's3' => array(
-		'path' => ''
+		'path' => '',
+    'maximum_backups' => ''
 		),
 
 	);
