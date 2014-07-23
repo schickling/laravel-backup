@@ -67,6 +67,7 @@ return array(
     // add the path to the restore and backup command of mysql
     // this exemple is if your are using MAMP server on a mac
     // on windows: 'C:\\...\\mysql\\bin\\'
+    // on linux: '/usr/bin/'
     // trailing slash is required
     'mysql' => array(
 			'dump_command_path' => '/Applications/MAMP/Library/bin/',
