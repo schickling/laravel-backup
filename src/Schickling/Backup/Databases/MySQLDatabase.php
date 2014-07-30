@@ -23,49 +23,75 @@ class MySQLDatabase implements DatabaseInterface
 		$this->port = $port;
 	}
 
-	public function dump($destinationFile)
+	public function dump($destinationFile, $compress = false)
 	{
-		$command = sprintf('%smysqldump --user=%s --password=%s --host=%s --port=%s %s > %s',
-			$this->getDumpCommandPath(),
-			escapeshellarg($this->user),
-			escapeshellarg($this->password),
-			escapeshellarg($this->host),
-			escapeshellarg($this->port),
-			escapeshellarg($this->database),
-			escapeshellarg($destinationFile)
-		);
+		$command = ($compress) ? 
+			sprintf('%smysqldump --user=%s --password=%s --host=%s --port=%s %s | gzip -v -9 > %s',
+				$this->getDumpCommandPath(),
+				escapeshellarg($this->user),
+				escapeshellarg($this->password),
+				escapeshellarg($this->host),
+				escapeshellarg($this->port),
+				escapeshellarg($this->database),
+				escapeshellarg($destinationFile)
+			) :		
+			sprintf('%smysqldump --user=%s --password=%s --host=%s --port=%s %s | gzip -v -9 > %s',
+				$this->getDumpCommandPath(),
+				escapeshellarg($this->user),
+				escapeshellarg($this->password),
+				escapeshellarg($this->host),
+				escapeshellarg($this->port),
+				escapeshellarg($this->database),
+				escapeshellarg($destinationFile)
+			);
 
 		return $this->console->run($command);
 	}
 
-	public function restore($sourceFile)
+	public function restore($sourceFile, $uncompress = false)
 	{
-		$command = sprintf('%smysql --user=%s --password=%s --host=%s --port=%s %s < %s',
-			$this->getRestoreCommandPath(),
-			escapeshellarg($this->user),
-			escapeshellarg($this->password),
-			escapeshellarg($this->host),
-			escapeshellarg($this->port),
-			escapeshellarg($this->database),
-			escapeshellarg($sourceFile)
-		);
-
-		return $this->console->run($command);
+		$command = ($uncompress) ? 
+			sprintf('%sgunzip -c %s | %smysql --user=%s --password=%s --host=%s --port=%s %s',
+				$this->getRestoreCommandPath(),
+				escapeshellarg($sourceFile),
+				$this->getRestoreCommandPath(),
+				escapeshellarg($this->user),
+				escapeshellarg($this->password),
+				escapeshellarg($this->host),
+				escapeshellarg($this->port),
+				escapeshellarg($this->database)
+			) :
+			sprintf('%smysql --user=%s --password=%s --host=%s --port=%s %s < %s',
+				$this->getRestoreCommandPath(),
+				escapeshellarg($this->user),
+				escapeshellarg($this->password),
+				escapeshellarg($this->host),
+				escapeshellarg($this->port),
+				escapeshellarg($this->database),
+				escapeshellarg($sourceFile)
+			);
+			return $this->console->run($command);
 	}
 
-	public function getFileExtension()
+	public function getFileExtension($compress = false)
 	{
-		return 'sql';
+		return ($compress) ? 'sql.gz' : 'sql';
+	}
+	
+	public function getCompressOption()
+	{
+		return Config::get('backup::mysql.compress');
 	}
 
 	protected function getDumpCommandPath()
 	{
-		return Config::get('backup::mysql.dump_command_path');;
+		return Config::get('backup::mysql.dump_command_path');
 	}
 
 	protected function getRestoreCommandPath()
 	{
-		return Config::get('backup::mysql.restore_command_path');;
+		return Config::get('backup::mysql.restore_command_path');
 	}
-
+	
+	
 }

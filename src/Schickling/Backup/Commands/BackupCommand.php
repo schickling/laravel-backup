@@ -8,14 +8,22 @@ use Config;
 class BackupCommand extends BaseCommand
 {
 	protected $name = 'db:backup';
+	
 	protected $description = 'Backup the default database to `app/storage/dumps`';
+	
 	protected $filePath;
+	
 	protected $fileName;
+	
+	protected $database;
+
 
 	public function fire()
 	{
-		$database = $this->getDatabase($this->input->getOption('database'));
+		$this->database = $this->getDatabase($this->input->getOption('database'));
 		$this->checkDumpFolder();
+
+		$compress = (strtolower($this->input->getOption('database')) == "mysql" || strtolower(Config::get('database.default')) == "mysql" && ($this->option('compress') || $this->database->getCompressOption())) ? true : false;
 
 		if ($this->argument('filename'))
 		{
@@ -34,11 +42,12 @@ class BackupCommand extends BaseCommand
 		}
 		else
 		{
-			$this->fileName = date('YmdHis') . '.' .$database->getFileExtension();
+			$fileNameFormat = Config::has('backup::filename_format') ? date(Config::get('backup::filename_format')) : date('YmdHis');
+			$this->fileName =  $fileNameFormat . '.' .$this->database->getFileExtension($compress);
 			$this->filePath = rtrim($this->getDumpsPath(), '/') . '/' . $this->fileName;
 		}
 
-		$status = $database->dump($this->filePath);
+		$status = $this->database->dump($this->filePath, $compress);
 
 		if ($status === true)
 		{
@@ -78,6 +87,7 @@ class BackupCommand extends BaseCommand
 	protected function getOptions()
 	{
 		return array(
+			array('compress', 'c', InputOption::VALUE_NONE, 'Compress the GZIP (MySQL only)'),
 			array('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to backup'),
 			array('upload-s3', 'u', InputOption::VALUE_REQUIRED, 'Upload the dump to your S3 bucket')
 			);

@@ -25,6 +25,12 @@ Creates a dump file in `app/storage/dumps`
 $ php artisan db:backup
 ```
 
+#### Backup and compress with GZIP
+Creates a compressed dump file in `app/storage/dumps`. Support MySQL database only. 
+```sh
+$ php artisan db:backup --compress 
+```
+
 ###### Use specific database
 ```sh
 $ php artisan db:backup --database=mysql
@@ -42,6 +48,12 @@ Paths are relative to the app/storage/dumps folder.
 ###### Restore a dump
 ```sh
 $ php artisan db:restore dump.sql
+```
+
+###### Restore a compressed dump
+Support MySQL database only. 
+```sh
+$ php artisan db:restore dump.sql --uncompress
 ```
 
 ###### List dumps
@@ -64,6 +76,9 @@ return array(
 	// add a backup folder in the app/database/ or your dump folder
     'path' => app_path() . '/database/backup/',
 
+	// specify a custom filename format to be used with the date() command. date('YmdHis') is the default format.
+	'filenameFormat' => '\d\b\_YmdHis',
+
     // add the path to the restore and backup command of mysql
     // this exemple is if your are using MAMP server on a mac
     // on windows: 'C:\\...\\mysql\\bin\\'
@@ -72,6 +87,7 @@ return array(
     'mysql' => array(
 			'dump_command_path' => '/Applications/MAMP/Library/bin/',
 			'restore_command_path' => '/Applications/MAMP/Library/bin/',
+			'compress' => false,
 		),
 
     // s3 settings
@@ -85,6 +101,9 @@ return array(
 
 #### ...for MySQL
 You need to have `mysqldump` installed. It's usually already installed with MySQL itself.
+
+#### ...to compress/uncompress dumps
+You need to have `gzip` and `gunzip` installed.
 
 ## TODO - Upcoming Features
 * `db:restore WRONGFILENAME` more detailed error message
