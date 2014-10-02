@@ -2,33 +2,29 @@
 
 use Illuminate\Console\Command;
 use Config;
-use Schickling\Backup\DatabaseBuilder;
+use Schickling\Backup\Databases\DatabaseInterface;
 use Schickling\Backup\ConsoleColors;
+use Symfony\Component\Filesystem\Filesystem;
 
 class BaseCommand extends Command
 {
-	protected $databaseBuilder;
+	protected $database;
 	protected $colors;
+	protected $fs;
 
-	public function __construct(DatabaseBuilder $databaseBuilder)
+	public function __construct(DatabaseInterface $database)
 	{
 		parent::__construct();
-
-		$this->databaseBuilder = $databaseBuilder;
 		$this->colors = new ConsoleColors();
-	}
-
-	public function getDatabase($database)
-	{
-		$database = $database ? : Config::get('database.default');
-		$realConfig = Config::get('database.connections.' . $database);
-
-		return $this->databaseBuilder->getDatabase($realConfig);
+		$this->database = $database;
+		$this->fs = new Filesystem();
 	}
 
 	protected function getDumpsPath()
 	{
-		return Config::get('backup::path');
+		$default = sprintf('%s/dumps/', storage_path());
+
+		return Config::get('database.backup.path', $default);;
 	}
 
 }
