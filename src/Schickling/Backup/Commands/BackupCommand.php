@@ -55,6 +55,12 @@ class BackupCommand extends BaseCommand
 			{
 				$this->uploadS3();
 				$this->line($this->colors->getColoredString("\n".'Upload complete.'."\n",'green'));
+
+				if ($this->option('unlink-after-s3'))
+				{
+					unlink($this->filePath);
+					$this->line($this->colors->getColoredString("\n".'Removed dump as it\'s now stored on S3.'."\n",'green'));
+				}
 			}
 		}
 		else
@@ -79,8 +85,9 @@ class BackupCommand extends BaseCommand
 	{
 		return array(
 			array('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to backup'),
-			array('upload-s3', 'u', InputOption::VALUE_REQUIRED, 'Upload the dump to your S3 bucket')
-			);
+			array('upload-s3', 'u', InputOption::VALUE_REQUIRED, 'Upload the dump to your S3 bucket'),
+			array('unlink-after-s3', true, InputOption::VALUE_NONE, 'The database connection to backup')
+		);
 	}
 
 	protected function checkDumpFolder()
