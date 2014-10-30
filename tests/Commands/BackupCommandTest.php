@@ -99,9 +99,35 @@ class BackupCommandTest extends TestCase
         $this->tester->execute(array(
             '--upload-s3' => 'bucket-title'
             ));
+    }
 
-        // $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. [0-9]{14}.sql was saved in the dumps folder.(\\n)*(\\033\[0m)*(\\033\[[0-9;]*m)*(\\n)*Upload complete.(\\n)*(\\033\[0m)*$/", $this->tester->getDisplay());
+     public function testKeepOnlyS3()
+    {
+        $s3Mock = m::mock();
+        $s3Mock->shouldReceive('putObject')
+               ->andReturn(true);
 
+        AWS::shouldReceive('get')
+           ->once()
+           ->with('s3')
+           ->andReturn($s3Mock);
+
+        File::shouldReceive('delete')
+              ->once()
+              ->andReturn(true);
+
+        $this->databaseMock->shouldReceive('getFileExtension')
+                           ->once()
+                           ->andReturn('sql');
+
+        $this->databaseMock->shouldReceive('dump')
+                           ->once()
+                           ->andReturn(true);
+
+        $this->tester->execute(array(
+          '--upload-s3' => 'bucket-title',
+          '--keep-only-s3' => true
+        ));
     }
 
     public function testAbsolutePathAsFilename()

@@ -4,6 +4,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use AWS;
 use Config;
+use File;
 
 class BackupCommand extends BaseCommand
 {
@@ -55,6 +56,12 @@ class BackupCommand extends BaseCommand
 			{
 				$this->uploadS3();
 				$this->line($this->colors->getColoredString("\n".'Upload complete.'."\n",'green'));
+
+				if ($this->option('keep-only-s3'))
+				{
+					File::delete($this->filePath);
+					$this->line($this->colors->getColoredString("\n".'Removed dump as it\'s now stored on S3.'."\n",'green'));
+				}
 			}
 		}
 		else
@@ -79,8 +86,9 @@ class BackupCommand extends BaseCommand
 	{
 		return array(
 			array('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to backup'),
-			array('upload-s3', 'u', InputOption::VALUE_REQUIRED, 'Upload the dump to your S3 bucket')
-			);
+			array('upload-s3', 'u', InputOption::VALUE_REQUIRED, 'Upload the dump to your S3 bucket'),
+			array('keep-only-s3', true, InputOption::VALUE_NONE, 'Delete the local dump after upload to S3 bucket')
+		);
 	}
 
 	protected function checkDumpFolder()
