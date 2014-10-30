@@ -34,6 +34,9 @@ $ php artisan db:backup --database=mysql
 ```sh
 $ php artisan db:backup --upload-s3 your-bucket
 ```
+
+Note: if you are planning to upload only to S3 and don't want to keep a local copy of the SQL dump use the `--keep-s3-only` option.
+
 Uses the [aws/aws-sdk-php-laravel](https://github.com/aws/aws-sdk-php-laravel) package which needs to be [configured](https://github.com/aws/aws-sdk-php-laravel#configuration).
 
 #### Restore
