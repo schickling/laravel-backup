@@ -125,7 +125,8 @@ class BackupCommandTest extends TestCase
                            ->andReturn(true);
 
         $this->tester->execute(array(
-          '--keep-only-s3'
+          '--upload-s3' => 'bucket-title',
+          '--keep-only-s3' => true
         ));
     }
 

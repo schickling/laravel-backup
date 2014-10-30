@@ -4,6 +4,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use AWS;
 use Config;
+use File;
 
 class BackupCommand extends BaseCommand
 {
