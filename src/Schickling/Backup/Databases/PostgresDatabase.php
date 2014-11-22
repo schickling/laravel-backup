@@ -1,6 +1,7 @@
 <?php namespace Schickling\Backup\Databases;
 
 use Schickling\Backup\Console;
+use Config;
 
 class PostgresDatabase implements DatabaseInterface
 {
@@ -22,8 +23,12 @@ class PostgresDatabase implements DatabaseInterface
 
 	public function dump($destinationFile)
 	{
-		$command = sprintf('PGPASSWORD=%s pg_dump -Fc --no-acl --no-owner -h %s -U %s %s > %s',
+		$excludedTablesStr = implode(' ', array_map(function ($table) {
+			return '--exclude-table-data=' . escapeshellarg($table);
+		}, $this->getExcludedTables()));
+		$command = sprintf('PGPASSWORD=%s pg_dump -Fc --no-acl --no-owner %s -h %s -U %s %s > %s',
 			escapeshellarg($this->password),
+			$excludedTablesStr,
 			escapeshellarg($this->host),
 			escapeshellarg($this->user),
 			escapeshellarg($this->database),
@@ -49,5 +54,10 @@ class PostgresDatabase implements DatabaseInterface
 	public function getFileExtension()
 	{
 		return 'dump';
+	}
+
+	protected function getExcludedTables()
+	{
+		return Config::get('backup::postgres.exclude_table_data', array());
 	}
 }

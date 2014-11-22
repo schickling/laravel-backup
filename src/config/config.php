@@ -13,4 +13,12 @@ return array(
 		'path' => ''
 		),
 
-	);
+	'postgres' => array(
+		'exclude_table_data' => array(
+			//'cache',
+			//'failed_jobs',
+			//'sessions',
+			),
+		),
+
+);
