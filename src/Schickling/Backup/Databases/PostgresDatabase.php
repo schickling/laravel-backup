@@ -20,7 +20,7 @@ class PostgresDatabase implements DatabaseInterface
 		$this->host = $host;
 	}
 
-	public function dump($destinationFile)
+	public function dump($destinationFile, $compress = false)
 	{
 		$command = sprintf('PGPASSWORD=%s pg_dump -Fc --no-acl --no-owner -h %s -U %s %s > %s',
 			escapeshellarg($this->password),
@@ -33,7 +33,7 @@ class PostgresDatabase implements DatabaseInterface
 		return $this->console->run($command);
 	}
 
-	public function restore($sourceFile)
+	public function restore($sourceFile, $uncompress = false)
 	{
 		$command = sprintf('PGPASSWORD=%s pg_restore --verbose --clean --no-acl --no-owner -h %s -U %s -d %s %s',
 			escapeshellarg($this->password),

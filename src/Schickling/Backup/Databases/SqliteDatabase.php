@@ -14,7 +14,7 @@ class SqliteDatabase implements DatabaseInterface
 		$this->databaseFile = $databaseFile;
 	}
 
-	public function dump($destinationFile)
+	public function dump($destinationFile, $compress = false)
 	{
 		$command = sprintf('cp %s %s',
 			escapeshellarg($this->databaseFile),
@@ -24,7 +24,7 @@ class SqliteDatabase implements DatabaseInterface
 		return $this->console->run($command);
 	}
 
-	public function restore($sourceFile)
+	public function restore($sourceFile, $uncompress = false)
 	{
 		$command = sprintf('cp -f %s %s',
 			escapeshellarg($sourceFile),
