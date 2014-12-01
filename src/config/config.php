@@ -10,4 +10,7 @@ return array(
 	's3' => array(
 		'path' => ''
 	),
+
+    'compress' => false,
 );
+
