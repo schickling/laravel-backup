@@ -71,16 +71,16 @@ class BackupCommand extends BaseCommand
 	}
 
 	/**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return array(
-            array('filename', InputArgument::OPTIONAL, 'Filename or -path for the dump.'),
-        );
-    }
+	 * Get the console command arguments.
+	 *
+	 * @return array
+	 */
+	protected function getArguments()
+	{
+		return array(
+			array('filename', InputArgument::OPTIONAL, 'Filename or -path for the dump.'),
+		);
+	}
 
 	protected function getOptions()
 	{
