@@ -59,9 +59,12 @@ class RestoreCommand extends BaseCommand
 			foreach ($finder as $dump)
 			{
 				$i++;
-				if($i!=$count){
+				if($i!=$count)
+				{
 					$this->line($this->colors->getColoredString($dump->getFilename(),'brown'));
-				}else{
+				}
+				else
+				{
 					$this->line($this->colors->getColoredString($dump->getFilename()."\n",'brown'));
 				}
 			}
@@ -76,7 +79,7 @@ class RestoreCommand extends BaseCommand
 	{
 		return array(
 			array('dump', InputArgument::OPTIONAL, 'Filename of the dump')
-			);
+		);
 	}
 
 	protected function getOptions()
@@ -85,5 +88,4 @@ class RestoreCommand extends BaseCommand
 			array('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to restore to'),
 		);
 	}
-
 }

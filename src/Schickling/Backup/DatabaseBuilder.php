@@ -12,24 +12,20 @@ class DatabaseBuilder
 
 	public function getDatabase(array $realConfig)
 	{
-
 		switch ($realConfig['driver'])
 		{
 			case 'mysql':
-			$this->buildMySQL($realConfig);
-			break;
-
+				$this->buildMySQL($realConfig);
+				break;
 			case 'sqlite':
-			$this->buildSqlite($realConfig);
-			break;
-
+				$this->buildSqlite($realConfig);
+				break;
 			case 'pgsql':
-			$this->buildPostgres($realConfig);
-			break;
-
+				$this->buildPostgres($realConfig);
+				break;
 			default:
-			throw new \Exception('Database driver not supported yet');
-			break;
+				throw new \Exception('Database driver not supported yet');
+				break;
 		}
 
 		return $this->database;
@@ -45,7 +41,7 @@ class DatabaseBuilder
 			$config['password'],
 			$config['host'],
 			$port
-			);
+		);
 	}
 
 	protected function buildSqlite(array $config)
@@ -53,7 +49,7 @@ class DatabaseBuilder
 		$this->database = new Databases\SqliteDatabase(
 			$this->console,
 			$config['database']
-			);
+		);
 	}
 
 	protected function buildPostgres(array $config)
@@ -64,7 +60,6 @@ class DatabaseBuilder
 			$config['username'],
 			$config['password'],
 			$config['host']
-			);
+		);
 	}
-
 }

@@ -60,7 +60,7 @@ __All settings are optional and have reasonable default values.__
 
 return array(
 
-	// add a backup folder in the app/database/ or your dump folder
+    // add a backup folder in the app/database/ or your dump folder
     'path' => app_path() . '/database/backup/',
 
     // add the path to the restore and backup command of mysql
@@ -69,14 +69,14 @@ return array(
     // on linux: '/usr/bin/'
     // trailing slash is required
     'mysql' => array(
-			'dump_command_path' => '/Applications/MAMP/Library/bin/',
-			'restore_command_path' => '/Applications/MAMP/Library/bin/',
-		),
+        'dump_command_path' => '/Applications/MAMP/Library/bin/',
+        'restore_command_path' => '/Applications/MAMP/Library/bin/',
+    ),
 
     // s3 settings
     's3' => array(
         'path'  => 'your/s3/dump/folder'
-        )
+    )
 );
 ```
 

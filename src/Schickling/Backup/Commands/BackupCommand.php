@@ -71,16 +71,16 @@ class BackupCommand extends BaseCommand
 	}
 
 	/**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return array(
-            array('filename', InputArgument::OPTIONAL, 'Filename or -path for the dump.'),
-        );
-    }
+	 * Get the console command arguments.
+	 *
+	 * @return array
+	 */
+	protected function getArguments()
+	{
+		return array(
+			array('filename', InputArgument::OPTIONAL, 'Filename or -path for the dump.'),
+		);
+	}
 
 	protected function getOptions()
 	{
@@ -109,7 +109,7 @@ class BackupCommand extends BaseCommand
 			'Bucket'     => $bucket,
 			'Key'        => $this->getS3DumpsPath() . '/' . $this->fileName,
 			'SourceFile' => $this->filePath,
-			));
+		));
 	}
 
 	protected function getS3DumpsPath()
@@ -118,5 +118,4 @@ class BackupCommand extends BaseCommand
 
 		return Config::get('backup::s3.path', $default);;
 	}
-
 }
