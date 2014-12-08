@@ -4,7 +4,6 @@ use Schickling\Backup\Console;
 
 class SqliteDatabase implements DatabaseInterface
 {
-
 	protected $console;
 	protected $databaseFile;
 

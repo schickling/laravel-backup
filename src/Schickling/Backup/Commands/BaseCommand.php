@@ -30,5 +30,4 @@ class BaseCommand extends Command
 	{
 		return Config::get('backup::path');
 	}
-
 }

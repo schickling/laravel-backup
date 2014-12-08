@@ -21,7 +21,6 @@ class BackupServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-
 		$databaseBuilder = new DatabaseBuilder();
 
 		$this->app['db.backup'] = $this->app->share(function($app) use ($databaseBuilder)
@@ -37,7 +36,6 @@ class BackupServiceProvider extends ServiceProvider {
 		$this->commands(
 			'db.backup',
 			'db.restore'
-			);
+		);
 	}
-
 }

@@ -5,7 +5,6 @@ use Config;
 
 class MySQLDatabase implements DatabaseInterface
 {
-
 	protected $console;
 	protected $database;
 	protected $user;
@@ -67,5 +66,4 @@ class MySQLDatabase implements DatabaseInterface
 	{
 		return Config::get('backup::mysql.restore_command_path');;
 	}
-
 }

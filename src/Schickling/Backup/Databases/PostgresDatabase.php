@@ -4,7 +4,6 @@ use Schickling\Backup\Console;
 
 class PostgresDatabase implements DatabaseInterface
 {
-
 	protected $console;
 	protected $database;
 	protected $user;

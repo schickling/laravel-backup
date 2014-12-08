@@ -109,7 +109,7 @@ class BackupCommand extends BaseCommand
 			'Bucket'     => $bucket,
 			'Key'        => $this->getS3DumpsPath() . '/' . $this->fileName,
 			'SourceFile' => $this->filePath,
-			));
+		));
 	}
 
 	protected function getS3DumpsPath()
@@ -118,5 +118,4 @@ class BackupCommand extends BaseCommand
 
 		return Config::get('backup::s3.path', $default);;
 	}
-
 }
