@@ -42,7 +42,7 @@ class BackupCommandTest extends TestCase
     {
         return array(
             'AWS' => 'Aws\Laravel\AwsFacade',
-            );
+        );
     }
 
     public function testSuccessfulBackup()
@@ -98,10 +98,10 @@ class BackupCommandTest extends TestCase
 
         $this->tester->execute(array(
             '--upload-s3' => 'bucket-title'
-            ));
+        ));
     }
 
-     public function testKeepOnlyS3()
+    public function testKeepOnlyS3()
     {
         $s3Mock = m::mock();
         $s3Mock->shouldReceive('putObject')
@@ -125,8 +125,8 @@ class BackupCommandTest extends TestCase
                            ->andReturn(true);
 
         $this->tester->execute(array(
-          '--upload-s3' => 'bucket-title',
-          '--keep-only-s3' => true
+            '--upload-s3' => 'bucket-title',
+            '--keep-only-s3' => true
         ));
     }
 
@@ -144,10 +144,10 @@ class BackupCommandTest extends TestCase
 
         $this->tester->execute(array(
             'filename' => $filename
-            ));
+        ));
+
         $regex = "/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to \/home\/dummy\/mydump.sql(\\n)*(\\033\[0m)*$/";
         $this->assertRegExp($regex, $this->tester->getDisplay());
-
     }
 
     public function testRelativePathAsFilename()
@@ -164,10 +164,10 @@ class BackupCommandTest extends TestCase
 
         $this->tester->execute(array(
             'filename' => $filename
-            ));
+        ));
+
         $path = str_replace('/', '\/', getcwd());
         $regex = "/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to " . $path . "\/dummy\/mydump.sql(\\n)*(\\033\[0m)*$/";
         $this->assertRegExp($regex, $this->tester->getDisplay());
     }
-
 }

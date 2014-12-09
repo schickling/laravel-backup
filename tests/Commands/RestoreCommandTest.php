@@ -48,7 +48,7 @@ class RestoreCommandTest extends TestCase
 
         $this->tester->execute(array(
             'dump' => 'testDump.sql'
-            ));
+        ));
 
         $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*testDump.sql was successfully restored.(\\n)*(\\033\[0m)*$/", $this->tester->getDisplay());
     }
@@ -64,7 +64,7 @@ class RestoreCommandTest extends TestCase
 
         $this->tester->execute(array(
             'dump' => 'testDump.sql'
-            ));
+        ));
 
         $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Database restore failed.(\\n)*(\\033\[0m)*$/", $this->tester->getDisplay());
     }
