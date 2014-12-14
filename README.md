@@ -1,4 +1,4 @@
-laravel-backup [![Build Status](https://travis-ci.org/schickling/laravel-backup.png)](https://travis-ci.org/schickling/laravel-backup) [![Coverage Status](https://coveralls.io/repos/schickling/laravel-backup/badge.png?branch=master)](https://coveralls.io/r/schickling/laravel-backup?branch=master) [![Total Downloads](https://poser.pugx.org/schickling/backup/downloads.png)](https://packagist.org/packages/schickling/backup)
+laravel-backup [![Build Status](https://travis-ci.org/schickling/laravel-backup.svg?branch=master)](https://travis-ci.org/schickling/laravel-backup) [![Coverage Status](https://coveralls.io/repos/schickling/laravel-backup/badge.png?branch=master)](https://coveralls.io/r/schickling/laravel-backup?branch=master) [![Total Downloads](https://poser.pugx.org/schickling/backup/downloads.png)](https://packagist.org/packages/schickling/backup)
 ==============
 
 Backup and restore database support for Laravel 4 applications
