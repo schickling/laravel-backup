@@ -77,6 +77,9 @@ return array(
     's3' => array(
         'path'  => 'your/s3/dump/folder'
     )
+
+    // Use GZIP compression
+    'compress' => false,
 );
 ```
 
@@ -88,7 +91,6 @@ You need to have `mysqldump` installed. It's usually already installed with MySQ
 ## TODO - Upcoming Features
 * `db:restore WRONGFILENAME` more detailed error message
 * `db:backup FILENAME` set title for dump
-* Compress dump files
 * S3
  * Upload as default
  * default bucket

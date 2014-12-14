@@ -14,6 +14,8 @@ class BackupCommandTest extends TestCase
     {
         parent::setUp();
 
+        $this->app->config->set('backup::compress', false);
+
         $this->databaseMock = m::mock('Schickling\Backup\Databases\DatabaseInterface');
         $this->databaseBuilderMock = m::mock('Schickling\Backup\DatabaseBuilder');
         $this->databaseBuilderMock->shouldReceive('getDatabase')
@@ -45,9 +47,8 @@ class BackupCommandTest extends TestCase
             );
     }
 
-    public function testSuccessfulBackup()
+    public function testSuccessfulUncompressedBackup()
     {
-
         $this->databaseMock->shouldReceive('getFileExtension')
                            ->once()
                            ->andReturn('sql');
@@ -61,9 +62,24 @@ class BackupCommandTest extends TestCase
         $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. [0-9]{14}.sql was saved in the dumps folder.(\\n)*(\\033\[0m)*$/", $this->tester->getDisplay());
     }
 
+    public function testSuccessfulCompressedBackup()
+    {
+        $this->databaseMock->shouldReceive('getFileExtension')
+                           ->once()
+                           ->andReturn('sql');
+
+        $this->databaseMock->shouldReceive('dump')
+                           ->once()
+                           ->andReturn(true);
+
+        $this->app->config->set('backup::compress', true);
+        $this->tester->execute(array());
+
+        $this->assertRegExp("/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. [0-9]{14}.sql.gz was saved in the dumps folder.(\\n)*(\\033\[0m)*$/", $this->tester->getDisplay());
+    }
+
     public function testFailingBackup()
     {
-
         $this->databaseMock->shouldReceive('getFileExtension')
                            ->once()
                            ->andReturn('sql');
@@ -169,5 +185,4 @@ class BackupCommandTest extends TestCase
         $regex = "/^(\\033\[[0-9;]*m)*(\\n)*Database backup was successful. Saved to " . $path . "\/dummy\/mydump.sql(\\n)*(\\033\[0m)*$/";
         $this->assertRegExp($regex, $this->tester->getDisplay());
     }
-
 }
