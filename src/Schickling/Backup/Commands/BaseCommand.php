@@ -31,22 +31,22 @@ class BaseCommand extends Command
 
 	protected function getDumpsPath()
 	{
-		return Config::get('backup::path');
+		return Config::get('backup.path');
 	}
 
 	public function enableCompression()
 	{
-		return Config::set('backup::compress', true);
+		return Config::set('backup.compress', true);
 	}
 
 	public function disableCompression()
 	{
-		return Config::set('backup::compress', false);
+		return Config::set('backup.compress', false);
 	}
 
 	public function isCompressionEnabled()
 	{
-		return Config::get('backup::compress');
+		return Config::get('backup.compress');
 	}
 
 	public function isCompressed($fileName)
