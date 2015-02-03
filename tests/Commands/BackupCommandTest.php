@@ -14,7 +14,7 @@ class BackupCommandTest extends TestCase
     {
         parent::setUp();
 
-        $this->app->config->set('backup::compress', false);
+        $this->app->config->set('backup.compress', false);
 
         $this->databaseMock = m::mock('Schickling\Backup\Databases\DatabaseInterface');
         $this->databaseBuilderMock = m::mock('Schickling\Backup\DatabaseBuilder');
