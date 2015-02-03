@@ -11,7 +11,9 @@ class BackupServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('schickling/backup');
+		$this->publishes([
+			__DIR__.'/../../config/config.php' => config_path('backup.php'),
+		]);
 	}
 
 	/**
