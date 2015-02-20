@@ -138,14 +138,14 @@ class BackupCommand extends BaseCommand {
 	{
 		$default = 365;
 
-		return Config::get( 'backup::s3.maximum_backups', $default );
+		return Config::get( 'backup.s3.maximum_backups', $default );
 	}
 
 	protected function getS3DumpsPath()
 	{
 		$default = 'dumps';
-
-		return Config::get('backup::s3.path', $default);
+		
+		return Config::get('backup.s3.path', $default);
 	}
 
 }

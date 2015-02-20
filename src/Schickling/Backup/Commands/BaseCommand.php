@@ -30,7 +30,7 @@ class BaseCommand extends Command
 
 	protected function getDumpsPath()
 	{
-		return Config::get('backup::path');
+		return Config::get('backup.path');
 	}
 
 }
