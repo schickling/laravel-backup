@@ -1,4 +1,4 @@
-<?php namespace Schickling\Backup\Commands;
+<?php namespace ColdTurkey\Backup\Commands;
 
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;

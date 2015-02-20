@@ -1,4 +1,4 @@
-<?php namespace Schickling\Backup;
+<?php namespace ColdTurkey\Backup;
 
 class DatabaseBuilder
 {

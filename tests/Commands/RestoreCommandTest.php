@@ -1,6 +1,6 @@
 <?php
 
-use Schickling\Backup\Commands\RestoreCommand;
+use ColdTurkey\Backup\Commands\RestoreCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 use Orchestra\Testbench\TestCase;
 use Mockery as m;
@@ -14,8 +14,8 @@ class RestoreCommandTest extends TestCase
     {
         parent::setUp();
 
-        $this->databaseMock = m::mock('Schickling\Backup\Databases\DatabaseInterface');
-        $this->databaseBuilderMock = m::mock('Schickling\Backup\DatabaseBuilder');
+        $this->databaseMock = m::mock('ColdTurkey\Backup\Databases\DatabaseInterface');
+        $this->databaseBuilderMock = m::mock('ColdTurkey\Backup\DatabaseBuilder');
         $this->databaseBuilderMock->shouldReceive('getDatabase')
                            ->once()
                            ->andReturn($this->databaseMock);
@@ -33,7 +33,7 @@ class RestoreCommandTest extends TestCase
     protected function getPackageProviders()
     {
         return array(
-            'Schickling\Backup\BackupServiceProvider',
+            'ColdTurkey\Backup\BackupServiceProvider',
         );
     }
 

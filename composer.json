@@ -1,5 +1,5 @@
 {
-    "name": "schickling/backup",
+    "name": "ctg/backup",
     "description": "Backup and restore database support for Laravel 5 applications",
     "authors": [
         {
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Schickling\\Backup": "src/"
+            "ColdTurkey\\Backup": "src/"
         }
     },
     "minimum-stability": "dev"

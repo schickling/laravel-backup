@@ -1,6 +1,6 @@
-<?php namespace Schickling\Backup\Databases;
+<?php namespace ColdTurkey\Backup\Databases;
 
-use Schickling\Backup\Console;
+use ColdTurkey\Backup\Console;
 use Config;
 
 class MySQLDatabase implements DatabaseInterface

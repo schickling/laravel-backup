@@ -1,4 +1,4 @@
-<?php namespace Schickling\Backup\Databases;
+<?php namespace ColdTurkey\Backup\Databases;
 
 interface DatabaseInterface
 {

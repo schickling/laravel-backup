@@ -1,6 +1,6 @@
 <?php
 
-use Schickling\Backup\Databases\PostgresDatabase;
+use ColdTurkey\Backup\Databases\PostgresDatabase;
 use Mockery as m;
 
 class PostgresDatabaseTest extends \PHPUnit_Framework_TestCase
@@ -11,7 +11,7 @@ class PostgresDatabaseTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->console = m::mock('Schickling\Backup\Console');
+        $this->console = m::mock('ColdTurkey\Backup\Console');
         $this->database = new PostgresDatabase($this->console, 'testDatabase', 'testUser', 'password', 'localhost');
     }
 

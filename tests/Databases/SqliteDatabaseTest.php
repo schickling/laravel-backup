@@ -1,6 +1,6 @@
 <?php
 
-use Schickling\Backup\Databases\SqliteDatabase;
+use ColdTurkey\Backup\Databases\SqliteDatabase;
 use Mockery as m;
 
 class SqliteDatabaseTest extends \PHPUnit_Framework_TestCase
@@ -11,7 +11,7 @@ class SqliteDatabaseTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->console = m::mock('Schickling\Backup\Console');
+        $this->console = m::mock('ColdTurkey\Backup\Console');
         $this->database = new SqliteDatabase($this->console, 'testDatabase.sqlite');
     }
 

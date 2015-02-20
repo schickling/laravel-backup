@@ -1,6 +1,6 @@
 <?php
 
-use Schickling\Backup\Commands\BackupCommand;
+use ColdTurkey\Backup\Commands\BackupCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 use Orchestra\Testbench\TestCase;
 use Mockery as m;
@@ -14,8 +14,8 @@ class BackupCommandTest extends TestCase
     {
         parent::setUp();
 
-        $this->databaseMock = m::mock('Schickling\Backup\Databases\DatabaseInterface');
-        $this->databaseBuilderMock = m::mock('Schickling\Backup\DatabaseBuilder');
+        $this->databaseMock = m::mock('ColdTurkey\Backup\Databases\DatabaseInterface');
+        $this->databaseBuilderMock = m::mock('ColdTurkey\Backup\DatabaseBuilder');
         $this->databaseBuilderMock->shouldReceive('getDatabase')
                            ->once()
                            ->andReturn($this->databaseMock);
@@ -33,7 +33,7 @@ class BackupCommandTest extends TestCase
     protected function getPackageProviders()
     {
         return array(
-            'Schickling\Backup\BackupServiceProvider',
+            'ColdTurkey\Backup\BackupServiceProvider',
             'Aws\Laravel\AwsServiceProvider',
         );
     }

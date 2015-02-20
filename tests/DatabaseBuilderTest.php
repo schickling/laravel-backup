@@ -1,6 +1,6 @@
 <?php
 
-use Schickling\Backup\DatabaseBuilder;
+use ColdTurkey\Backup\DatabaseBuilder;
 
 class DatabaseBuilderTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,7 +19,7 @@ class DatabaseBuilderTest extends \PHPUnit_Framework_TestCase
         $databaseBuilder = new DatabaseBuilder();
         $database = $databaseBuilder->getDatabase($config);
 
-        $this->assertInstanceOf('Schickling\Backup\Databases\MySQLDatabase', $database);
+        $this->assertInstanceOf('ColdTurkey\Backup\Databases\MySQLDatabase', $database);
     }
 
     public function testSqlite()
@@ -32,7 +32,7 @@ class DatabaseBuilderTest extends \PHPUnit_Framework_TestCase
         $databaseBuilder = new DatabaseBuilder();
         $database = $databaseBuilder->getDatabase($config);
 
-        $this->assertInstanceOf('Schickling\Backup\Databases\SqliteDatabase', $database);
+        $this->assertInstanceOf('ColdTurkey\Backup\Databases\SqliteDatabase', $database);
     }
 
     public function testPostgres() {
@@ -47,7 +47,7 @@ class DatabaseBuilderTest extends \PHPUnit_Framework_TestCase
         $databaseBuilder = new DatabaseBuilder();
         $database = $databaseBuilder->getDatabase($config);
 
-        $this->assertInstanceOf('Schickling\Backup\Databases\PostgresDatabase', $database);
+        $this->assertInstanceOf('ColdTurkey\Backup\Databases\PostgresDatabase', $database);
     }
 
     public function testUnsupported()

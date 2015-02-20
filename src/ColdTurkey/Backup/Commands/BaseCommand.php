@@ -1,9 +1,9 @@
-<?php namespace Schickling\Backup\Commands;
+<?php namespace ColdTurkey\Backup\Commands;
 
 use Illuminate\Console\Command;
 use Config;
-use Schickling\Backup\DatabaseBuilder;
-use Schickling\Backup\ConsoleColors;
+use ColdTurkey\Backup\DatabaseBuilder;
+use ColdTurkey\Backup\ConsoleColors;
 use Symfony\Component\Filesystem\Filesystem;
 
 class BaseCommand extends Command

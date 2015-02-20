@@ -1,6 +1,6 @@
 <?php
 
-use Schickling\Backup\Console;
+use ColdTurkey\Backup\Console;
 
 class ConsoleTest extends \PHPUnit_Framework_TestCase
 {

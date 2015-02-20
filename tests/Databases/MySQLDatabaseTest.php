@@ -1,6 +1,6 @@
 <?php
 
-use Schickling\Backup\Databases\MySQLDatabase;
+use ColdTurkey\Backup\Databases\MySQLDatabase;
 use Mockery as m;
 
 class MySQLDatabaseTest extends \PHPUnit_Framework_TestCase
@@ -11,7 +11,7 @@ class MySQLDatabaseTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->console = m::mock('Schickling\Backup\Console');
+        $this->console = m::mock('ColdTurkey\Backup\Console');
         $this->database = new MySQLDatabase($this->console, 'testDatabase', 'testUser', 'password', 'localhost', '3306');
     }
 
