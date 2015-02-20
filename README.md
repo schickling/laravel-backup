@@ -1,17 +1,20 @@
-laravel-backup [![Build Status](https://travis-ci.org/schickling/laravel-backup.png)](https://travis-ci.org/schickling/laravel-backup) [![Coverage Status](https://coveralls.io/repos/schickling/laravel-backup/badge.png?branch=master)](https://coveralls.io/r/schickling/laravel-backup?branch=master) [![Total Downloads](https://poser.pugx.org/schickling/backup/downloads.png)](https://packagist.org/packages/schickling/backup)
-==============
-
-Backup and restore database support for Laravel 4 applications
+Backup and restore database support for Laravel 5 applications
 
 ## Installation
 
 1. Add the following to your composer.json and run `composer update`
 
     ```json
-    {
-        "require": {
-            "schickling/backup": "dev-master"
-        }
+    {	
+	    "repositories": [
+      	{
+          "type": "git",
+					"url": "https://github.com/aaronhuisinga/laravel-backup.git"
+				}
+			],
+      "require": {
+        "schickling/backup": "dev-master"
+      }
     }
     ```
 
@@ -95,7 +98,4 @@ You need to have `mysqldump` installed. It's usually already installed with MySQ
  * default bucket
 * More detailed folder checking (permission, existence, ...)
 * *Some more ideas? Tell me!*
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/schickling/laravel-backup/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
