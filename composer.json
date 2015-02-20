@@ -1,6 +1,6 @@
 {
     "name": "schickling/backup",
-    "description": "Backup and restore database support for Laravel 4 applications",
+    "description": "Backup and restore database support for Laravel 5 applications",
     "authors": [
         {
             "name": "Johannes Schickling",
@@ -13,7 +13,7 @@
         "aws/aws-sdk-php-laravel": "1.*"
     },
     "require-dev": {
-        "laravel/framework": "4.1.*",
+        "laravel/framework": "5.0.*",
         "orchestra/testbench": "2.1.*",
         "satooshi/php-coveralls": "0.6.*",
         "mockery/mockery": "dev-master"
@@ -22,6 +22,5 @@
         "psr-0": {
             "Schickling\\Backup": "src/"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
